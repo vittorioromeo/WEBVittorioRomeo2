@@ -63,7 +63,7 @@ CodeLiteDir:=C:\Program Files (x86)\CodeLite
 WXWIN:=C:\wxWidgets
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
 WXCFG:=gcc_dll\mswu
-Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/Utils$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/main$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -94,14 +94,6 @@ $(IntermediateDirectory)/main$(DependSuffix): main.cpp
 $(IntermediateDirectory)/main$(PreprocessSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main$(PreprocessSuffix) "D:/Vee/Software/GitHub/OHWorkspace/WEBVittorioRomeo2/main.cpp"
 
-$(IntermediateDirectory)/Utils$(ObjectSuffix): Utils.cpp $(IntermediateDirectory)/Utils$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "D:/Vee/Software/GitHub/OHWorkspace/WEBVittorioRomeo2/Utils.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/Utils$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Utils$(DependSuffix): Utils.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Utils$(ObjectSuffix) -MF$(IntermediateDirectory)/Utils$(DependSuffix) -MM "D:/Vee/Software/GitHub/OHWorkspace/WEBVittorioRomeo2/Utils.cpp"
-
-$(IntermediateDirectory)/Utils$(PreprocessSuffix): Utils.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Utils$(PreprocessSuffix) "D:/Vee/Software/GitHub/OHWorkspace/WEBVittorioRomeo2/Utils.cpp"
-
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -111,9 +103,6 @@ clean:
 	$(RM) $(IntermediateDirectory)/main$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/main$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/main$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Utils$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Utils$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Utils$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "D:\Vee\Software\GitHub\OHWorkspace\.build-release\WEBVittorioRomeo2"

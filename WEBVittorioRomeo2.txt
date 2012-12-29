@@ -1,1 +1,1 @@
-./Release/main.o ./Release/Utils.o  
+./Release/main.o  

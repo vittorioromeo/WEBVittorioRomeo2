@@ -7,11 +7,22 @@
 #include <ctemplate/template.h>
 #include <boost/filesystem.hpp>
 #include <vector>
-#include "Utils.h"
 
 using namespace std;
 using namespace boost::filesystem;
 using namespace ctemplate;
+
+Json::Value getJsonFileRoot(string mFilePath)
+{
+	Json::Value root;
+	Json::Reader reader;
+	ifstream stream{mFilePath, ifstream::binary};
+	bool parsingSuccessful{reader.parse(stream, root, false)};
+	if (!parsingSuccessful) cout << reader.getFormatedErrorMessages() << endl;
+
+	return root;
+}
+
 
 int countChar(char mChar, string mString)
 {

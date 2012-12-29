@@ -9,8 +9,6 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="Utils.cpp"/>
-    <File Name="Utils.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
