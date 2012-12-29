@@ -1,0 +1,10 @@
+{
+	"Template": "Templates/Entries/header.tpl",
+
+	"ToExpand":
+	{
+		"Title": "projects",
+		"Text": "Everything I'm working on or I've worked on.
+				<hr>"
+	}
+}

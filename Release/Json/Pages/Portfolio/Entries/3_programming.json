@@ -1,0 +1,27 @@
+{
+	"Template": "Templates/Entries/text.tpl",
+
+	"ToExpand":
+	{
+		"Title": "programming",
+		"Text": "<p>5+ years of experience with C# and the .NET framework.<br>
+				1+ year of experience with C++11 and the STL.<br>
+				1+ year of experience with HTML, CSS and JS.<br>
+				<br>
+				5+ years of experience with 2D game development.<br>
+				5+ years of experience with desktop application development.<br>
+				<br>
+				2+ years of experience with SFML and XNA.<br>
+				1+ years of experience with JSONcpp, cTemplate and LUA.<br>
+				<br>
+				Basic knowledge of computer science theory concepts.<br>
+				Ability to learn new languages and libraries quickly.<br>
+				Ability to refactor, organize and optimize existing code.<br>
+				Knowledge of common game development algorithms and techniques.<br>
+				<br>
+				Familiarity with both Windows and Linux development environments.<br>
+				Experience with Visual Studio, Eclipse, Code::Blocks and CodeLite IDEs.<br>
+				Experience with MinGW, GCC, Clang and Boost.<br></p>
+				<hr>"
+	}
+}

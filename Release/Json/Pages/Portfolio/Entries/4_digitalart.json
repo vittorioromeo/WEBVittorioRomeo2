@@ -1,0 +1,17 @@
+{
+	"Template": "Templates/Entries/text.tpl",
+
+	"ToExpand":
+	{
+		"Title": "digital art",
+		"Text": "<p>5+ years of experience with Adobe Creative Suite.<br>
+				Experience in video-making and VFX.<br>
+				Experience in visual design and projects destined for printing.<br>
+				Experience in basic audio editing.<br>
+				<br>
+				Ability to create videos and trailers for products or organizations.<br>
+				Ability to create both web and print visual designs.<br>
+				Ability to create logos and recognizable branding.<br>
+				Experience in working with clients.<br></p>"
+	}
+}

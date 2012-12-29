@@ -1,0 +1,10 @@
+{
+	"Template": "Templates/Entries/header.tpl",
+
+	"ToExpand":
+	{
+		"Title": "home page",
+		"Text": "Welcome to my new website! This is the place where you'll find all of my projects and my personal blog. Enjoy your stay.
+				<hr>"
+	}
+}

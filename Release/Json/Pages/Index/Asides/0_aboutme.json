@@ -1,0 +1,9 @@
+{
+	"Template": "Templates/Asides/text.tpl",
+
+	"ToExpand":
+	{
+		"Title": "about me",
+		"Text": "My name is Vittorio Romeo, I'm a 18 years old italian student. I like to develop games, applications and websites in my spare time, along with design and video editing work.</p></br><p>I am currently looking for a job or projects to work on. Check out my portfolio or contact me if you're interested."
+	}
+}

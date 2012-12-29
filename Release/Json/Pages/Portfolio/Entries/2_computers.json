@@ -1,0 +1,19 @@
+{
+	"Template": "Templates/Entries/text.tpl",
+
+	"ToExpand":
+	{
+		"Title": "computers",
+		"Text": "<p>10+ years of experience with computers in general.<br>
+				10+ years of experience with the Windows operating system.<br>
+				1+ years of experience with the Linux operating system.<br>
+				<br>
+				Familiarity with technology: I've been interested in it all my life.<br>
+				Ability to apprehend new technologies quickly and efficiently.<br>
+				<br>
+				Ability to set up small networks.<br>
+				Ability to solve hardware and software problems.<br>
+				Ability to build a PC from scratch.<br></p>
+				<hr>"
+	}
+}
