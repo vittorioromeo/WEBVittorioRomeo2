@@ -19,10 +19,8 @@ Json::Value getJsonFileRoot(string mFilePath)
 	ifstream stream{mFilePath, ifstream::binary};
 	bool parsingSuccessful{reader.parse(stream, root, false)};
 	if (!parsingSuccessful) cout << reader.getFormatedErrorMessages() << endl;
-
 	return root;
 }
-
 
 int countChar(char mChar, string mString)
 {
@@ -63,8 +61,7 @@ void recursiveFill(vector<path>& mPathVector, const path& mDirectoryPath, const 
 
 void fillDict(TemplateDictionary* mDict, Json::Value mValue)
 {
-	for(Json::ValueIterator itr{mValue.begin()}; itr != mValue.end(); ++itr)
-		mDict->SetValue(itr.key().asString(), (*itr).asString());
+	for(Json::ValueIterator itr{mValue.begin()}; itr != mValue.end(); ++itr) mDict->SetValue(itr.key().asString(), (*itr).asString());
 }
 
 // ---

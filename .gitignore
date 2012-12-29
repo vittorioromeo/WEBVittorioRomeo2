@@ -172,3 +172,4 @@ pip-log.txt
 *.ttf
 *.i
 *.a
+.sassCache
