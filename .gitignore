@@ -172,4 +172,5 @@ pip-log.txt
 *.ttf
 *.i
 *.a
-.sassCache
+.sass-cache
+./Release/Result/Resources/css/.sass-cache/
