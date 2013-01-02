@@ -167,8 +167,14 @@ struct Page
 		{
 			Json::Value root{getJsonFileRoot(s.string())};
 
-			if(root.isMember("MenuItems")) main.addMenu(root);
-			else main.addEntry(root);	
+			if(!root.isMember("Entries"))
+			{
+				if(root.isMember("MenuItems")) main.addMenu(root); else main.addEntry(root);
+			}
+			else
+			{
+				for (Json::Value value : root["Entries"]) if(value.isMember("MenuItems")) main.addMenu(value); else main.addEntry(value);
+			}
 		}
 		for(auto s : asidePaths) main.addAside(getJsonFileRoot(s.string()));
 	}

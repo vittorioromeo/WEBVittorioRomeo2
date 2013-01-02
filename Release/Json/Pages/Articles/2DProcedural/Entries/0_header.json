@@ -1,0 +1,10 @@
+{
+	"Template": "Templates/Entries/header.tpl",
+
+	"ToExpand":
+	{
+		"Title": "2d procedural level generation",
+		"Text": "My journey in figuring out how to generate interesting 2D environments.
+				<hr>"
+	}
+}

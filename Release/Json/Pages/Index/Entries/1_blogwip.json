@@ -1,10 +1,15 @@
 {
-	"Template": "Templates/Entries/blog.tpl",
+	"Entries":
+	[
+		{
+			"Template": "Templates/Entries/blog.tpl",
 
-	"ToExpand":
-	{
-		"Title": "blog under construction",
-		"Text": "<p>When the code that generates the blog entries is ready, the blog will be displayed right here, on the home page. Stay tuned!</p>",
-		"Date": "29 december 2012"
-	}
+			"ToExpand":
+			{
+				"Title": "blog under construction",
+				"Text": "<p>When the code that generates the blog entries is ready, the blog will be displayed right here, on the home page. Stay tuned!</p>",
+				"Date": "29 december 2012"
+			}
+		}
+	]
 }

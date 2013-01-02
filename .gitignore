@@ -174,3 +174,4 @@ pip-log.txt
 *.a
 .sass-cache
 ./Release/Result/Resources/css/.sass-cache/
+*.scssc

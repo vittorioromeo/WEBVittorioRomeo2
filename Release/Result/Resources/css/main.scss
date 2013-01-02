@@ -2,6 +2,7 @@
 $colorMain: rgb(160, 160, 160);
 $colorText: rgb(25, 25, 25);
 $colorBlank: rgb(255, 255, 255);
+$colorPage: rgb(255, 255, 255);
 $borderThickness: 3px;
 $menuPaddingX: 0px; 
 $menuPaddingY: 3px;
@@ -31,14 +32,14 @@ textarea { resize: vertical; }
 .chromeframe {
     margin: 0.2em 0;
     background: #ccc;
-    color: #000;
+    color: $colorBlank;
     padding: 0.2em 0;
 }
 
 // Container backgrounds and borders
 .mainMenu { border-bottom: $borderThickness solid $colorMain; margin-bottom: 35px; }
 .footer-container, .main aside { border-top: $borderThickness solid $colorMain; }
-.header-container, .footer-container, .main aside { background: $colorBlank; }
+.header-container, .footer-container, .mainMenu, .main aside { background: $colorBlank; }
 .headerLogos { max-width: 100%; max-height: 100%; } 
 .asidePhoto { float: right; width:49%; }
 .asideText { float: left; width: 49%;}
@@ -46,12 +47,13 @@ textarea { resize: vertical; }
 .entryText img { max-width: 100%; max-height: 100%; }
 
 // Font stuff
-h1, h2, h3, h4, h5, h6 { font-weight: normal; letter-spacing: 0.2em; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; letter-spacing: 0.16em; line-height: 0.8em; }
 body { 
+    background-color: $colorPage;
     color: $colorText;
     font: 16px/26px Helvetica, Helvetica Neue, Arial; 
-    letter-spacing: 0.11em;
-    line-height: 1.1em;
+    letter-spacing: 0.09em;
+    line-height: 1.15em;
 }
 
 // Article
@@ -118,8 +120,9 @@ nav {
 // Footer
 .footer-container footer {
     text-align: center; 
+    background-color: $colorBlank;
     color: $colorMain; 
-    padding: 20px 0; 
+    padding: 1.6% 0; 
     letter-spacing: 4px;
 }
 

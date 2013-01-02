@@ -10,7 +10,7 @@ $(document).scroll(function() {
     $('.mainMenu').toggleClass('fixedMainMenu', useFixedSidebar);
 
     if(useFixedSidebar) $('.main').css({"margin-top": "60px"});  
-    else $('.main').css({"margin-top": "0px"});	  
+    else $('.main').css.get({"margin-top": "0px"});	  
 });
 
 // Menu buttons

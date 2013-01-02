@@ -33,7 +33,7 @@ textarea {
 .chromeframe {
   margin: 0.2em 0;
   background: #ccc;
-  color: #000;
+  color: white;
   padding: 0.2em 0; }
 
 .mainMenu {
@@ -43,7 +43,7 @@ textarea {
 .footer-container, .main aside {
   border-top: 3px solid #a0a0a0; }
 
-.header-container, .footer-container, .main aside {
+.header-container, .footer-container, .mainMenu, .main aside {
   background: white; }
 
 .headerLogos {
@@ -68,13 +68,15 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
-  letter-spacing: 0.2em; }
+  letter-spacing: 0.16em;
+  line-height: 0.8em; }
 
 body {
+  background-color: white;
   color: #191919;
   font: 16px/26px Helvetica, Helvetica Neue, Arial;
-  letter-spacing: 0.11em;
-  line-height: 1.1em; }
+  letter-spacing: 0.09em;
+  line-height: 1.15em; }
 
 article header, article footer {
   color: #a0a0a0; }
@@ -137,8 +139,9 @@ nav a {
 
 .footer-container footer {
   text-align: center;
+  background-color: white;
   color: #a0a0a0;
-  padding: 20px 0;
+  padding: 1.6% 0;
   letter-spacing: 4px; }
 
 @media only screen and (max-width: 480px) {
