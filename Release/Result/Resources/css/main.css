@@ -113,7 +113,7 @@ nav li {
   background-color: #a0a0a0; }
 nav a {
   display: block;
-  padding: 3px 0px;
+  padding: 1px 0px;
   margin-bottom: 3px;
   text-align: center;
   text-decoration: none;
@@ -123,6 +123,8 @@ nav a {
 
 .main {
   padding: 0px 0; }
+  .main article {
+    margin-top: -20px; }
   .main aside {
     color: #a0a0a0;
     padding: 0px 2%;
@@ -187,7 +189,7 @@ nav a {
     text-align: center;
     float: center;
     width: 84px;
-    padding: 3px 0px;
+    padding: 1px 0px;
     margin-bottom: 0; }
   nav ul {
     margin: 0;
@@ -204,13 +206,17 @@ nav a {
 
   .oldie nav a {
     margin: 0 0.7%; } }
+@media only screen and (max-width: 768px) {
+  .main aside {
+    text-align: center; } }
 @media only screen and (min-width: 768px) {
   .main article {
     width: 64%;
     float: right; }
   .main aside {
     float: left;
-    width: 100%; }
+    width: 100%;
+    text-align: right; }
   .main .asideWrapper {
     width: 29%;
     float: left;

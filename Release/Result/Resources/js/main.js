@@ -5,12 +5,12 @@ var animSpeed = 160;
 
 // Fixed main menu
 $(document).scroll(function() {
-    var useFixedSidebar = $(document).scrollTop() >= 60;
+    var useFixedSidebar = $(document).scrollTop() >= 80;
     
     $('.mainMenu').toggleClass('fixedMainMenu', useFixedSidebar);
 
-    if(useFixedSidebar) $('.main').css({"margin-top": "60px"});  
-    else $('.main').css.get({"margin-top": "0px"});	  
+    if(useFixedSidebar) $('.main').css({"margin-top": "80px"});  
+    else $('.main').css({"margin-top": "0px"});	  
 });
 
 // Menu buttons
