@@ -68,15 +68,14 @@ textarea {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   line-height: 0.8em; }
 
 body {
   background-color: white;
   color: #191919;
   font: 16px/26px Helvetica, Helvetica Neue, Arial;
-  letter-spacing: 0.09em;
-  line-height: 1.15em; }
+  line-height: 1.35em; }
 
 article header, article footer {
   color: #a0a0a0; }

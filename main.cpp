@@ -167,17 +167,13 @@ struct Page
 		{
 			Json::Value root{getJsonFileRoot(s.string())};
 
-			if(!root.isMember("Entries"))
-			{
-				if(root.isMember("MenuItems")) main.addMenu(root); else main.addEntry(root);
-			}
-			else
-			{
-				for (Json::Value value : root["Entries"]) if(value.isMember("MenuItems")) main.addMenu(value); else main.addEntry(value);
-			}
+			if(!root.isMember("Entries")) appendEntry(root);
+			else for (Json::Value value : root["Entries"]) appendEntry(value);
 		}
 		for(auto s : asidePaths) main.addAside(getJsonFileRoot(s.string()));
 	}
+
+	void appendEntry(Json::Value mRoot) { if(mRoot.isMember("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
 
 	path getResultPath()
 	{
@@ -188,6 +184,7 @@ struct Page
 	string getOutput()
 	{
 		string resourcesPath{getResourcesFolderPath(getDepth(getResultPath()) - 1)};
+		
 		string result;
 		TemplateDictionary dict("page");		
 		dict["MainMenu"] = mainMenu.getOutput();
@@ -195,7 +192,6 @@ struct Page
 		dict["ResourcesPath"] = resourcesPath;
 		ExpandTemplate("Templates/page.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
 		StringToTemplateCache(root["fileName"].asString(), result, ctemplate::DO_NOT_STRIP);
-
 
 		string finalResult;
 		TemplateDictionary dict2("page2");
@@ -233,9 +229,21 @@ void expandPages()
 
 		// --- Write page to file
 		cout << "> " << page.getResultPath() << endl;
-		ofstream o{page.getResultPath().string()};
+		ofstream o{page.getResultPath().string() + "temp"};
 		o << page.getOutput(); o.flush(); o.close();
 		cout << endl;
+
+		ifstream in_file(page.getResultPath().string() + "temp");
+		ofstream out_file(page.getResultPath().string());
+
+		string line;
+		while (getline(in_file, line)) if (!line.empty()) out_file << line;
+
+		in_file.close();
+		out_file.flush();
+		out_file.close();
+
+		remove(page.getResultPath().string() + "temp");
 	}
 }
 
