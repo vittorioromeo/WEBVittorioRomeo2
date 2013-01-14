@@ -115,6 +115,13 @@ nav {
         box-shadow: 0 1px 5px #aaa;
         p { margin: 0; } 
     }
+    .noBorderAside {
+        color: $colorMain; 
+        margin-bottom: 25px; 
+        text-align: right; 
+        padding-bottom: 15px;
+        p { margin: 0; } 
+    }
 }
 
 // Footer

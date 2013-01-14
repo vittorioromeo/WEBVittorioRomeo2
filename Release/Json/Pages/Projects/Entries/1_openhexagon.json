@@ -18,8 +18,8 @@
 		{
 			"MenuItems":
 			[
-				{ "Title": "download (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.52.7z" },
-				{ "Title": "download (linux)", 		"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.51.tar.gz" },
+				{ "Title": "download (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.6.7z" },
+				{ "Title": "download (linux)", 		"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.52Linux.7z" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
 				{ "Title": "facebook", 				"Link": "http://www.facebook.com/OpenHexagon\" target=\"_blank\"" },
 				{ "Title": "github", 				"Link": "https://github.com/SuperV1234/SSVOpenHexagon\" target=\"_blank\"" },

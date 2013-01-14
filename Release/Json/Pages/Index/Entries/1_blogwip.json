@@ -6,10 +6,21 @@
 
 			"ToExpand":
 			{
+				"Title": "open hexagon v1.6 released",
+				"Text": "<p>Bug fixes, custom sounds, and other small changes. Download from the projects page.</p>
+						<hr>",
+				"Date": "14 january 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "open hexagon v1.52 released",
 				"Text": "<p>Fixed some annoying bugs. Download from the projects page.</p>
 						<hr>",
-				"Date": "1 january 2012"
+				"Date": "1 january 2013"
 			}
 		},
 		{
