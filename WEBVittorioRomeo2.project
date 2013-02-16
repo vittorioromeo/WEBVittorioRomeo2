@@ -60,14 +60,17 @@
       </Completion>
     </Configuration>
     <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-O3;-Wall;-std=c++11" C_Options="-O2;-Wall" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+      <Compiler Options="-W;-pedantic;-O3;-Wextra;-std=c++11;-Wall" C_Options="-O2;-Wall" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
-        <IncludePath Value="D:/WIP/ctemplate/ctemplate-read-only/src"/>
+        <IncludePath Value="D:/Vee/Software/Repos"/>
+        <IncludePath Value="D:/Vee/Software/Repos/ctemplate"/>
+        <IncludePath Value="D:/Vee/Software/Repos/ctemplate/src"/>
         <IncludePath Value="D:/Vee/Software/WIP/jsoncpp/include"/>
         <IncludePath Value="D:/Vee/Software/WIP/boost"/>
       </Compiler>
       <Linker Options="" Required="yes">
-        <LibraryPath Value="D:/WIP/ctemplate/ctemplate-read-only/.libs"/>
+        <LibraryPath Value="D:/Vee/Software/Repos/ctemplate"/>
+        <LibraryPath Value="D:/Vee/Software/Repos/ctemplate/.libs"/>
         <LibraryPath Value="D:/Vee/Software/WIP/jsoncpp/libs/mingw"/>
         <LibraryPath Value="D:/Vee/Software/WIP/boost/libs"/>
         <LibraryPath Value="D:/Vee/Software/WIP/boost/bin.v2/libs/filesystem/build/gcc-mingw-4.7.2/release/link-static/threading-multi"/>
@@ -78,7 +81,7 @@
         <Library Value="libboost_system-mgw47-mt-1_52.a"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="./_RELEASE/$(ProjectName).exe" IntermediateDirectory="./_INTERMEDIATE" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./_RELEASE" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>

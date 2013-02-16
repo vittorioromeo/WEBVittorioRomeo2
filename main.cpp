@@ -155,7 +155,6 @@ struct Page
 	Page(path mPath, Json::Value mRoot) : myPath{mPath}, root{mRoot}
 	{
 		mainMenu = MainMenu{getJsonFileRoot("Json/mainMenu.json")};
-		main = Main{};
 
 		string pageFolder{path{myPath}.remove_leaf().string()};
 		string entriesFolder{pageFolder + "/Entries"}, asidesFolder{pageFolder + "/Asides"};

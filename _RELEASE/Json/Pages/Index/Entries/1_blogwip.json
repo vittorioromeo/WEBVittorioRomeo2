@@ -1,0 +1,48 @@
+{
+	"Entries":
+	[
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "\"tutorials\" section created",
+				"Text": "<p>I added a new section to the website where I will share my tutorials and my articles. Check it out!</p>
+						<hr>",
+				"Date": "12 february 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.6 released",
+				"Text": "<p>Bug fixes, custom sounds, and other small changes. Download from the projects page.</p>
+						<hr>",
+				"Date": "14 january 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.52 released",
+				"Text": "<p>Fixed some annoying bugs. Download from the projects page.</p>
+						<hr>",
+				"Date": "1 january 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "blog under construction",
+				"Text": "<p>When the code that generates the blog entries is ready, the blog will be displayed right here, on the home page. Stay tuned!</p>",
+				"Date": "29 december 2012"
+			}
+		}
+	]
+}

@@ -7,14 +7,14 @@ ProjectName            :=WEBVittorioRomeo2
 ConfigurationName      :=Release
 WorkspacePath          := "D:\Vee\Software\GitHub\OHWorkspace"
 ProjectPath            := "D:\Vee\Software\GitHub\OHWorkspace\WEBVittorioRomeo2"
-IntermediateDirectory  :=./Release
+IntermediateDirectory  :=./_INTERMEDIATE
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Vittorio
-Date                   :=01/15/13
-CodeLitePath           :="c:\Program Files (x86)\CodeLite"
+Date                   :=12/02/2013
+CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
 ObjectSuffix           :=.o
@@ -27,7 +27,7 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
+OutputFile             :=./_RELEASE/$(ProjectName).exe
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
@@ -38,12 +38,12 @@ MakeDirCommand         :=makedir
 RcCmpOptions           := 
 RcCompilerName         :=windres
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)D:/WIP/ctemplate/ctemplate-read-only/src $(IncludeSwitch)D:/Vee/Software/WIP/jsoncpp/include $(IncludeSwitch)D:/Vee/Software/WIP/boost 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)D:/Vee/Software/Repos $(IncludeSwitch)D:/Vee/Software/Repos/ctemplate $(IncludeSwitch)D:/Vee/Software/Repos/ctemplate/src $(IncludeSwitch)D:/Vee/Software/WIP/jsoncpp/include $(IncludeSwitch)D:/Vee/Software/WIP/boost 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := $(LibrarySwitch)ctemplate $(LibrarySwitch)json_mingw_libmt $(LibrarySwitch)boost_filesystem-mgw47-mt-1_52 $(LibrarySwitch)boost_system-mgw47-mt-1_52 
 ArLibs                 :=  "libctemplate.a" "libjson_mingw_libmt.a" "libboost_filesystem-mgw47-mt-1_52.a" "libboost_system-mgw47-mt-1_52.a" 
-LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)D:/WIP/ctemplate/ctemplate-read-only/.libs $(LibraryPathSwitch)D:/Vee/Software/WIP/jsoncpp/libs/mingw $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/libs $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/filesystem/build/gcc-mingw-4.7.2/release/link-static/threading-multi $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/system/build/gcc-mingw-4.7.2/release/link-static/threading-multi 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)D:/Vee/Software/Repos/ctemplate $(LibraryPathSwitch)D:/Vee/Software/Repos/ctemplate/.libs $(LibraryPathSwitch)D:/Vee/Software/WIP/jsoncpp/libs/mingw $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/libs $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/filesystem/build/gcc-mingw-4.7.2/release/link-static/threading-multi $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/system/build/gcc-mingw-4.7.2/release/link-static/threading-multi 
 
 ##
 ## Common variables
@@ -52,17 +52,15 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)D:/WIP/ctemp
 AR       := ar rcus
 CXX      := g++
 CC       := gcc
-CXXFLAGS :=  -O3 -Wall -std=c++11 $(Preprocessors)
+CXXFLAGS :=  -W -pedantic -O3 -Wextra -std=c++11 -Wall $(Preprocessors)
 CFLAGS   :=  -O2 -Wall $(Preprocessors)
 
 
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=c:\Program Files (x86)\CodeLite
-WXWIN:=C:\wxWidgets
+CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
-WXCFG:=gcc_dll\mswu
 Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) 
 
 Objects=$(Objects0) 
@@ -77,10 +75,10 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 	@$(MakeDirCommand) $(@D)
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
-	$(LinkerName) $(OutputSwitch)$(OutputFile) $(Objects) $(LibPath) $(Libs) $(LinkOptions)
+	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
 
 $(IntermediateDirectory)/.d:
-	@$(MakeDirCommand) "./Release"
+	@$(MakeDirCommand) "./_INTERMEDIATE"
 
 PreBuild:
 

@@ -1,0 +1,10 @@
+{
+	"Template": "Templates/Entries/header.tpl",
+
+	"ToExpand":
+	{
+		"Title": "tutorials",
+		"Text": "Wherein I share my programming experience with you.
+				<hr>"
+	}
+}
