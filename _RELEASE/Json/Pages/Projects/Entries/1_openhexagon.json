@@ -18,8 +18,9 @@
 		{
 			"MenuItems":
 			[
-				{ "Title": "download 1.7 (win)", 	"Link": "/Downloads/OpenHexagon/OpenHexagonV1.7.7z" },
-				{ "Title": "download 1.7 (linux)", 	"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.7Linux.tar.gz" },
+				{ "Title": "get 1.7 (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.7.7z" },
+				{ "Title": "get 1.7 (linux)", 		"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.7Linux.tar.gz" },
+				{ "Title": ".deb packages", 		"Link": "/Downloads/OpenHexagon/Linux/Deb\" target=\"_blank\"" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
 				{ "Title": "facebook", 				"Link": "http://www.facebook.com/OpenHexagon\" target=\"_blank\"" },
 				{ "Title": "github", 				"Link": "https://github.com/SuperV1234/SSVOpenHexagon\" target=\"_blank\"" },

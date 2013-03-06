@@ -1,6 +1,18 @@
 {
 	"Entries":
 	[
+			{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": ".deb packages for OH v1.7 available",
+				"Text": "<p>Download on the projects page.</p>
+						<p>Thanks Łukasz Magiera! :)</p>
+						<hr>",
+				"Date": "6 march 2013"
+			}
+		},
 		{
 			"Template": "Templates/Entries/blog.tpl",
 
