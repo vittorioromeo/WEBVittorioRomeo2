@@ -1,1 +1,1 @@
-./_INTERMEDIATE/main.o   
+./_INTERMEDIATE/main.o

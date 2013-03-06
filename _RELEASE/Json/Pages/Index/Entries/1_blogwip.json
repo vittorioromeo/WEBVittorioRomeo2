@@ -6,6 +6,19 @@
 
 			"ToExpand":
 			{
+				"Title": "open hexagon v1.7 released",
+				"Text": "<p>Brand new 3D effects, a circular level, a lot of bug fixes and code cleanup. Download it and share your creations :)</p>
+						<p><a href=\"http://www.youtube.com/watch?v=9T8HWaxMv88\">Update trailer</a></p>
+						<p>Update: Linux port released! Thanks Ethan Lee!</p>
+						<hr>",
+				"Date": "3 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "\"tutorials\" section created",
 				"Text": "<p>I added a new section to the website where I will share my tutorials and my articles. Check it out!</p>
 						<hr>",

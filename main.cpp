@@ -18,7 +18,7 @@ Json::Value getJsonFileRoot(string mFilePath)
 	Json::Reader reader;
 	ifstream stream{mFilePath, ifstream::binary};
 	bool parsingSuccessful{reader.parse(stream, root, false)};
-	if (!parsingSuccessful) cout << reader.getFormatedErrorMessages() << endl;
+	if(!parsingSuccessful) cout << reader.getFormatedErrorMessages() << endl;
 	return root;
 }
 
@@ -41,21 +41,21 @@ string getResourcesFolderPath(int mDepth)
 
 void recursiveFill(vector<path>& mPathVector, const path& mDirectoryPath)
 {
-	if (!exists(mDirectoryPath)) return;
+	if(!exists(mDirectoryPath)) return;
 	for (directory_iterator itr{mDirectoryPath}; itr != directory_iterator{}; ++itr)
 	{
-		if (is_directory(itr->status())) recursiveFill(mPathVector, itr->path());
+		if(is_directory(itr->status())) recursiveFill(mPathVector, itr->path());
 		else mPathVector.push_back(itr->path());
 	}
 }
 
 void recursiveFill(vector<path>& mPathVector, const path& mDirectoryPath, const string mFileName)
 {
-	if (!exists(mDirectoryPath)) return;
+	if(!exists(mDirectoryPath)) return;
 	for (directory_iterator itr{mDirectoryPath}; itr != directory_iterator{}; ++itr)
 	{
-		if (is_directory(itr->status())) recursiveFill(mPathVector, itr->path(), mFileName);
-		else if (itr->path().filename() == mFileName) mPathVector.push_back(itr->path());
+		if(is_directory(itr->status())) recursiveFill(mPathVector, itr->path(), mFileName);
+		else if(itr->path().filename() == mFileName) mPathVector.push_back(itr->path());
 	}
 }
 
@@ -236,7 +236,7 @@ void expandPages()
 		ofstream out_file(page.getResultPath().string());
 
 		string line;
-		while (getline(in_file, line)) if (!line.empty()) out_file << line;
+		while (getline(in_file, line)) if(!line.empty()) out_file << line;
 
 		in_file.close();
 		out_file.flush();
