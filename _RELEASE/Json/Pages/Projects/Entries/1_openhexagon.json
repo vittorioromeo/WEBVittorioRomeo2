@@ -12,15 +12,16 @@
 						Gameplay is easy to learn but hard to master.<br>
 						You control a triangle that rotates around the center of the screen.<br>
 						Your goal is to stay alive as long as possible by avoiding the walls that go towards the center.<br>
-						Features JSON and LUA scripting for complete customization and level sharing.</p>"
+						Features JSON and LUA scripting for complete customization and level sharing.</p>
+						<p>Since 1.8, you can now compete online for the top high scores!</p>"
 			}
 		},
 		{
 			"MenuItems":
 			[
-				{ "Title": "get 1.7 (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.7.7z" },
+				{ "Title": "get 1.82 (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.82.7z" },
 				{ "Title": "get 1.7 (linux)", 		"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.7Linux.tar.gz" },
-				{ "Title": ".deb packages", 		"Link": "/Downloads/OpenHexagon/Linux/Deb\" target=\"_blank\"" },
+				{ "Title": "get 1.7 (.deb)", 		"Link": "/Downloads/OpenHexagon/Linux/Deb\" target=\"_blank\"" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
 				{ "Title": "facebook", 				"Link": "http://www.facebook.com/OpenHexagon\" target=\"_blank\"" },
 				{ "Title": "github", 				"Link": "https://github.com/SuperV1234/SSVOpenHexagon\" target=\"_blank\"" },

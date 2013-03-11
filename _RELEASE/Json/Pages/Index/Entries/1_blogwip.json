@@ -1,7 +1,43 @@
 {
 	"Entries":
 	[
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
 			{
+				"Title": "open hexagon v1.82 released",
+				"Text": "<p>Bugfix and minor improvements update.</p>
+						<p>Download on the projects page.</p>
+						<hr>",
+				"Date": "11 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.81 released",
+				"Text": "<p>Bugfix update. Scores have been unfortunately wiped for security reasons.</p>
+						<p>Download on the projects page.</p>
+						<hr>",
+				"Date": "10 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.8 released",
+				"Text": "<p>Online functionality update! High scores, leaderboards, version checking. Also, a lot of bug fixes and improvements.</p>
+						<p>Download on the projects page.</p>
+						<hr>",
+				"Date": "10 march 2013"
+			}
+		},
+		{
 			"Template": "Templates/Entries/blog.tpl",
 
 			"ToExpand":
