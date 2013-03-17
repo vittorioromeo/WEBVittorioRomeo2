@@ -6,6 +6,42 @@
 
 			"ToExpand":
 			{
+				"Title": "open hexagon v1.84 released",
+				"Text": "<p>Security and performance update.</p>
+						<p>Download on the projects page.</p>
+						<hr>",
+				"Date": "15 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.83 released",
+				"Text": "<p>Security update.</p>
+						<p>Download on the projects page.</p>
+						<hr>",
+				"Date": "14 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.82 now available for linux",
+				"Text": "<p>Thanks to Lukasz Magiera (deb port) and Ethan Lee (tar.gz port), Open Hexagon v1.82 is now available on Linux.</p>
+						<p>Download on the projects page.</p>
+						<hr>",
+				"Date": "12 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "open hexagon v1.82 released",
 				"Text": "<p>Bugfix and minor improvements update.</p>
 						<p>Download on the projects page.</p>
