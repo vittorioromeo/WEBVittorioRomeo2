@@ -20,7 +20,7 @@
 			"MenuItems":
 			[
 				{ "Title": "get 1.84 (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.84.7z" },
-				{ "Title": "get 1.82 (linux targz)","Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.82.tar.gz" },
+				{ "Title": "get 1.84 (linux targz)","Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.84.tar.gz" },
 				{ "Title": "get 1.82 (deb 32)", "Link": "/Downloads/OpenHexagon/Linux/Deb/openhexagon1.82-32.deb" },
 				{ "Title": "get 1.82 (deb 64)", "Link": "/Downloads/OpenHexagon/Linux/Deb/openhexagon1.82-64.deb" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
