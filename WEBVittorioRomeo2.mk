@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=vittorio.romeo
-Date                   :=22/03/2013
+Date                   :=24/03/2013
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -43,7 +43,7 @@ IncludePCH             :=
 RcIncludePath          := 
 Libs                   := $(LibrarySwitch)ctemplate $(LibrarySwitch)json_mingw_libmt $(LibrarySwitch)boost_filesystem-mgw47-mt-1_52 $(LibrarySwitch)boost_system-mgw47-mt-1_52 
 ArLibs                 :=  "libctemplate.a" "libjson_mingw_libmt.a" "libboost_filesystem-mgw47-mt-1_52.a" "libboost_system-mgw47-mt-1_52.a" 
-LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)D:/Vee/Software/Repos/ctemplate $(LibraryPathSwitch)D:/Vee/Software/Repos/ctemplate/.libs $(LibraryPathSwitch)D:/Vee/Software/WIP/jsoncpp/libs/mingw $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/libs $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/filesystem/build/gcc-mingw-4.7.2/release/link-static/threading-multi $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/system/build/gcc-mingw-4.7.2/release/link-static/threading-multi 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)D:/Vee/Software/Repos/ctemplate $(LibraryPathSwitch)D:/Vee/Software/Repos/ctemplate/.libs $(LibraryPathSwitch)../jsoncpp/libs/mingw $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/libs $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/filesystem/build/gcc-mingw-4.7.2/release/link-static/threading-multi $(LibraryPathSwitch)D:/Vee/Software/WIP/boost/bin.v2/libs/system/build/gcc-mingw-4.7.2/release/link-static/threading-multi 
 
 ##
 ## Common variables
@@ -64,6 +64,8 @@ UNIT_TEST_PP_SRC_DIR:=C:\UnitTest++-1.3
 WXWIN:=C:\wxWidgets-2.9.4
 WXCFG:=gcc_dll\mswu
 Objects0=$(IntermediateDirectory)/main$(ObjectSuffix) 
+
+
 
 Objects=$(Objects0) 
 
