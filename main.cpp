@@ -4,9 +4,9 @@
 #include <fstream>
 #include <string.h>
 #include <sstream>
-#include <ctemplate/template.h>
 #include <boost/filesystem.hpp>
 #include <vector>
+#include <ctemplate/template.h>
 
 using namespace std;
 using namespace boost::filesystem;
