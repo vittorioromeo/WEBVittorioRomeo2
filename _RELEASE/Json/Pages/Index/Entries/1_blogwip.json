@@ -6,6 +6,17 @@
 
 			"ToExpand":
 			{
+				"Title": "open hexagon v1.9 released",
+				"Text": "<p>A brand new level pack and an auto updating system!</p>
+						<hr>",
+				"Date": "29 march 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "open hexagon v1.84 released",
 				"Text": "<p>Security and performance update.</p>
 						<p>Download on the projects page.</p>

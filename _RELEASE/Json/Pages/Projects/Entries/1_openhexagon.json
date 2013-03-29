@@ -19,15 +19,16 @@
 		{
 			"MenuItems":
 			[
-				{ "Title": "get 1.84 (win)", 		"Link": "/Downloads/OpenHexagon/OpenHexagonV1.84.7z" },
-				{ "Title": "get 1.84 (linux targz)","Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.84.tar.gz" },
-				{ "Title": "get 1.82 (deb 32)", "Link": "/Downloads/OpenHexagon/Linux/Deb/openhexagon1.82-32.deb" },
-				{ "Title": "get 1.82 (deb 64)", "Link": "/Downloads/OpenHexagon/Linux/Deb/openhexagon1.82-64.deb" },
+				{ "Title": "1.9(win)", 				"Link": "/Downloads/OpenHexagon/OpenHexagonV1.9.7z" },
+				{ "Title": "updater(win)", 			"Link": "/Downloads/OpenHexagon/OHAutoUpdaterV1.0.7z" },
+				{ "Title": "1.84(linux targz)",		"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.84.tar.gz" },
+				{ "Title": "1.82(deb32)", 			"Link": "/Downloads/OpenHexagon/Linux/Deb/openhexagon1.82-32.deb" },
+				{ "Title": "1.82(deb64)", 			"Link": "/Downloads/OpenHexagon/Linux/Deb/openhexagon1.82-64.deb" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
-				{ "Title": "facebook", 				"Link": "http://www.facebook.com/OpenHexagon\" target=\"_blank\"" },
+				{ "Title": "fb", 					"Link": "http://www.facebook.com/OpenHexagon\" target=\"_blank\"" },
 				{ "Title": "packs", 				"Link": "/Downloads/OpenHexagon/LevelPacks\" target=\"_blank\"" },
 				{ "Title": "github", 				"Link": "https://github.com/SuperV1234/SSVOpenHexagon\" target=\"_blank\"" },
-				{ "Title": "old versions", 			"Link": "/Downloads/OpenHexagon\" target=\"_blank\"" }
+				{ "Title": "old", 					"Link": "/Downloads/OpenHexagon\" target=\"_blank\"" }
 			]
 		}
 	]
