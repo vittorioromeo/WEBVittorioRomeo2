@@ -6,6 +6,19 @@
 
 			"ToExpand":
 			{
+				"Title": "back to work, update",
+				"Text": "<p>Hello everyone, I've been on vacation for a week and I'm back at home now. I'm very busy with school (final exams are in about 1 month), but I will use most of my spare time to work on my projects.</p>
+						<p>Current development is on Open Hexagon updates, but also on my libraries and on experimental prototypes. I've also added a donation button to the site, which you can use if you'd like to support my work.</p>
+						<p>I will try to keep you updated in the following weeks!</p>
+						<hr>",
+				"Date": "7 may 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "open hexagon v1.91 released",
 				"Text": "<p>Server improvements.</p>
 						<hr>",
