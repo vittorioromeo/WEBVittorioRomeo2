@@ -1,4 +1,4 @@
-#include <stdio>
+
 #include <string>
 #include <fstream>
 #include <string>
@@ -13,25 +13,11 @@
 using namespace std;
 using namespace boost::filesystem;
 using namespace ctemplate;
+using namespace ssvu;
+using namespace ssvu::FileSystem;
+using namespace ssvuj;
 
-Json::Value getJsonFileRoot(string mFilePath)
-{
-	Json::Value root;
-	Json::Reader reader;
-	ifstream stream{mFilePath, ifstream::binary};
-	bool parsingSuccessful{reader.parse(stream, root, false)};
-	if(!parsingSuccessful) cout << reader.getFormatedErrorMessages() << endl;
-	return root;
-}
-
-int countChar(char mChar, string mString)
-{
-	int result{0};
-	for(auto c = mString.begin(); c != mString.end(); ++c) if(mChar == *c) result++;
-	return result;
-}
-
-int getDepth(path mPath) { return countChar('/', mPath.string()) + countChar('\\', mPath.string()); }
+int getDepth(path mPath) { return getCharCount(mPath.string(), '/') + getCharCount(mPath.string(), '\\'); }
 
 string getResourcesFolderPath(int mDepth)
 {
@@ -39,26 +25,6 @@ string getResourcesFolderPath(int mDepth)
 
 	for(int i{0}; i < mDepth; ++i) result += s;
 	return result + "Resources";
-}
-
-void recursiveFill(vector<path>& mPathVector, const path& mDirectoryPath)
-{
-	if(!exists(mDirectoryPath)) return;
-	for (directory_iterator itr{mDirectoryPath}; itr != directory_iterator{}; ++itr)
-	{
-		if(is_directory(itr->status())) recursiveFill(mPathVector, itr->path());
-		else mPathVector.push_back(itr->path());
-	}
-}
-
-void recursiveFill(vector<path>& mPathVector, const path& mDirectoryPath, const string mFileName)
-{
-	if(!exists(mDirectoryPath)) return;
-	for (directory_iterator itr{mDirectoryPath}; itr != directory_iterator{}; ++itr)
-	{
-		if(is_directory(itr->status())) recursiveFill(mPathVector, itr->path(), mFileName);
-		else if(itr->path().filename() == mFileName) mPathVector.push_back(itr->path());
-	}
 }
 
 void fillDict(TemplateDictionary* mDict, Json::Value mValue)
@@ -76,13 +42,12 @@ struct MainMenu
 	{
 		Json::Value menuItems{root["MenuItems"]};
 		string result;
-		TemplateDictionary dict("mainMenu");
+		TemplateDictionary dict{"mainMenu"};
 
-		for(Json::ValueIterator itr{menuItems.begin()}; itr != menuItems.end(); ++itr)
+		for(auto& i : as<vector<Json::Value>>(menuItems))
 		{
-			Json::Value menuItem{(*itr)};
-			TemplateDictionary* subDict = dict.AddSectionDictionary("MenuItems");
-			fillDict(subDict, menuItem);
+			TemplateDictionary* subDict{dict.AddSectionDictionary("MenuItems")};
+			fillDict(subDict, i);
 		}
 
 		ExpandTemplate("Templates/Base/mainMenu.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
@@ -94,7 +59,7 @@ struct Main
 {
 	vector<string> expandedEntries, expandedAsides;
 
-	void expandItem(string mTemplatePath, Json::Value mToExpand, string mDictName, vector<string>& mTargetVector)
+	void expandItem(const string& mTemplatePath, Json::Value mToExpand, const string& mDictName, vector<string>& mTargetVector)
 	{
 		string result;
 		TemplateDictionary dict(mDictName);
@@ -111,13 +76,12 @@ struct Main
 	{
 		Json::Value menuItems{mRoot["MenuItems"]};
 		string result;
-		TemplateDictionary dict("menu");
+		TemplateDictionary dict{"menu"};
 
-		for(Json::ValueIterator itr{menuItems.begin()}; itr != menuItems.end(); ++itr)
+		for(auto& i : as<vector<Json::Value>>(menuItems))
 		{
-			Json::Value menuItem{(*itr)};
-			TemplateDictionary* subDict = dict.AddSectionDictionary("MenuItems");
-			fillDict(subDict, menuItem);
+			TemplateDictionary* subDict{dict.AddSectionDictionary("MenuItems")};
+			fillDict(subDict, i);
 		}
 
 		ExpandTemplate("Templates/Entries/menu.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
@@ -129,16 +93,16 @@ struct Main
 		string result;
 		TemplateDictionary dict("main");
 
-		for(auto entry : expandedEntries)
+		for(const auto& e : expandedEntries)
 		{
 			TemplateDictionary* subDict{dict.AddSectionDictionary("Entries")};
-			subDict->SetValue("Entry", entry);
+			subDict->SetValue("Entry", e);
 		}
 
-		for(auto aside : expandedAsides)
+		for(const auto& a : expandedAsides)
 		{
 			TemplateDictionary* subDict{dict.AddSectionDictionary("Asides")};
-			subDict->SetValue("Aside", aside);
+			subDict->SetValue("Aside", a);
 		}
 
 		ExpandTemplate("Templates/Base/main.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
@@ -156,38 +120,33 @@ struct Page
 
 	Page(path mPath, Json::Value mRoot) : myPath{mPath}, root{mRoot}
 	{
-		mainMenu = MainMenu{getJsonFileRoot("Json/mainMenu.json")};
+		mainMenu = MainMenu{getRootFromFile("Json/mainMenu.json")};
 
 		string pageFolder{path{myPath}.remove_leaf().string()};
-		string entriesFolder{pageFolder + "/Entries"}, asidesFolder{pageFolder + "/Asides"};
-		
-		vector<path> entryPaths; recursiveFill(entryPaths, path(entriesFolder));
-		vector<path> asidePaths; recursiveFill(asidePaths, path(asidesFolder));
+		string entriesFolder{pageFolder + "/Entries/"}, asidesFolder{pageFolder + "/Asides/"};
 
-		for(auto s : entryPaths)
+		vector<string> entryPaths{getRecursiveFiles(entriesFolder)}, asidePaths{getRecursiveFiles(asidesFolder)};
+
+		for(const auto& s : entryPaths)
 		{
-			Json::Value root{getJsonFileRoot(s.string())};
+			Json::Value root{getRootFromFile(s)};
 
 			if(!root.isMember("Entries")) appendEntry(root);
-			else for (Json::Value value : root["Entries"]) appendEntry(value);
+			else for(Json::Value value : root["Entries"]) appendEntry(value);
 		}
-		for(auto s : asidePaths) main.addAside(getJsonFileRoot(s.string()));
+		for(const auto& s : asidePaths) main.addAside(getRootFromFile(s));
 	}
 
 	void appendEntry(Json::Value mRoot) { if(mRoot.isMember("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
 
-	path getResultPath()
-	{
-		string s{myPath.string()};
-		return path("Result/" + root["fileName"].asString());
-	}
+	path getResultPath() const { return path("Result/" + root["fileName"].asString()); }
 
 	string getOutput()
 	{
 		string resourcesPath{getResourcesFolderPath(getDepth(getResultPath()) - 1)};
-		
+
 		string result;
-		TemplateDictionary dict("page");		
+		TemplateDictionary dict("page");
 		dict["MainMenu"] = mainMenu.getOutput();
 		dict["Main"] = main.getOutput();
 		dict["ResourcesPath"] = resourcesPath;
@@ -207,51 +166,45 @@ vector<Page> pages;
 
 void loadPages()
 {
-	cout << "Getting all page.json files" << endl;
-	path pagesPath{"Json/Pages"};
-	vector<path> pageJsonPaths;
-	recursiveFill(pageJsonPaths, pagesPath, "page.json");
-	for(auto s : pageJsonPaths)
+	log("Getting all page.json files", "loadPages");
+
+	string pagesPath("Json/Pages/");
+	vector<string> pageJsonPaths{getRecursiveFilesByName(pagesPath, "page.json")};
+
+	for(const auto& s : pageJsonPaths)
 	{
-		cout << "> " << s.string() << endl;
-		pages.push_back(Page{s, getJsonFileRoot(s.string())});
+		log("> " + s, "loadPages");
+		pages.push_back(Page{s, getRootFromFile(s)});
 	}
 }
 
 void expandPages()
 {
-	cout << "Writing pages to result" << endl;
-	for (Page page : pages)
+	log("Writing pages to result", "expandPages");
+
+	for(auto& p : pages)
 	{
-		// --- Check path
-		path parentPath{page.getResultPath().remove_leaf()};
-		cout << "Checking if path exists: " << parentPath.string() << endl;
-		if(!exists(parentPath)) create_directory(parentPath);
+		// Check path
+		path parentPath{p.getResultPath().remove_leaf()};
+		log("Checking if path exists: " + parentPath.string(), "expandPages");
+		if(!exists(parentPath)) createFolder(parentPath.string());
 
-		// --- Write page to file
-		cout << "> " << page.getResultPath() << endl;
-		ofstream o{page.getResultPath().string() + "temp"};
-		o << page.getOutput(); o.flush(); o.close();
-		cout << endl;
+		// Write page to file
+		string resultPath{p.getResultPath().string()};
 
-		ifstream in_file(page.getResultPath().string() + "temp");
-		ofstream out_file(page.getResultPath().string());
+		log("> " + resultPath, "expandPages");
+		ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
+		log("");
+
+		ifstream inFile(resultPath + "temp");
+		ofstream outFile(resultPath);
 
 		string line;
-		while (getline(in_file, line)) if(!line.empty()) out_file << line;
+		while(getline(inFile, line)) if(!line.empty()) outFile << line;
 
-		in_file.close();
-		out_file.flush();
-		out_file.close();
-
-		remove(page.getResultPath().string() + "temp");
+		inFile.close(); outFile.flush(); outFile.close();
+		remove(p.getResultPath().string() + "temp");
 	}
 }
 
-int main()
-{
-	loadPages();
-	expandPages();
-
-	return 0;
-}
+int main(){ loadPages(); expandPages(); return 0; }
