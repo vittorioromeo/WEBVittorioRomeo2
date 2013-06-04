@@ -1,12 +1,14 @@
-#include <stdio.h>
-#include <jsoncpp/json.h>
+#include <stdio>
 #include <string>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <sstream>
-#include <boost/filesystem.hpp>
 #include <vector>
 #include <ctemplate/template.h>
+#include <boost/filesystem.hpp>
+#include <SSVJsonCpp/SSVJsonCpp.h>
+#include <SSVUtils/SSVUtils.h>
+#include <SSVUtilsJson/SSVUtilsJson.h>
 
 using namespace std;
 using namespace boost::filesystem;
