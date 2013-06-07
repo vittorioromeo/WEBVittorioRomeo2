@@ -125,7 +125,7 @@ struct Page
 		string pageFolder{path{myPath}.remove_leaf().string()};
 		string entriesFolder{pageFolder + "/Entries/"}, asidesFolder{pageFolder + "/Asides/"};
 
-		vector<string> entryPaths{getRecursiveFiles(entriesFolder)}, asidePaths{getRecursiveFiles(asidesFolder)};
+		vector<string> entryPaths{get<Mode::RECURSIVE, Type::FILES>(entriesFolder)}, asidePaths{get<Mode::RECURSIVE, Type::FILES>(asidesFolder)};
 
 		for(const auto& s : entryPaths)
 		{
@@ -169,7 +169,7 @@ void loadPages()
 	log("Getting all page.json files", "loadPages");
 
 	string pagesPath("Json/Pages/");
-	vector<string> pageJsonPaths{getRecursiveFilesByName(pagesPath, "page.json")};
+	vector<string> pageJsonPaths{get<Mode::RECURSIVE, Type::FILES, Pick::BY_NAME>(pagesPath, "page.json")};
 
 	for(const auto& s : pageJsonPaths)
 	{
@@ -207,4 +207,4 @@ void expandPages()
 	}
 }
 
-int main(){ loadPages(); expandPages(); return 0; }
+int main() { loadPages(); expandPages(); return 0; }
