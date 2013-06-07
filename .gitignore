@@ -176,3 +176,5 @@ pip-log.txt
 ./Release/Result/Resources/css/.sass-cache/
 *.scssc
 /_RELEASE/WEBVittorioRomeo2
+/CMakeLists.txt.user.0000000
+/CMakeLists.txt.user.7626ec3
