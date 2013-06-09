@@ -12,6 +12,7 @@ using namespace std;
 using namespace ctemplate;
 using namespace ssvu;
 using namespace ssvu::FileSystem;
+using namespace ssvu::TemplateSystem;
 using namespace ssvuj;
 
 int getDepth(const string& mPath) { return getCharCount(mPath, '/') + getCharCount(mPath, '\\'); }
@@ -204,13 +205,27 @@ void expandPages()
 	}
 }
 
+
 int main()
 {
-	//log(getParentPath("/usr/local/test/a"));
-	//return 0;
+	// TODO: cool c++11 initializer list syntax for dictionaries
+	// TODO: template system helpers for files
 
-	//for(auto& x :/home/vittorioromeo/OHWorkspace/WEBVittorioRomeo2/_RELEASE/Json/Pages/Index/Entries/ getScan<Mode::Recurse>("/home/vittorioromeo/OHWorkspace/WEBVittorioRomeo2/_RELEASE/Json/Pages/Index/Entries/")) log(x); return 0;
+	Dictionary innerChild;
+	innerChild.setStringReplacement("ichildKey", "dreaming...");
 
+	Dictionary child;
+	child.setStringReplacement("childKey", "childValue");
+	child.addSectionReplacement("iSection", innerChild);
 
+	Dictionary main;
+	main.setStringReplacement("testKey", "testValue");
+	main.addSectionReplacement("testSection", child);
+	main.addSectionReplacement("testSection", child);
+
+	string s = main.getExpanded("a{{#testSection}} \n this is child value: {{childKey}}a  and this is a inner section {{#iSection}} \n inner child value: {{ichildKey}}   {{/iSection}}\n{{/testSection}}\nr ... testKey hahaaaa testCock {{testKey}} banana {{testKey}}");
+	log(s);
+
+	return 0;
 	loadPages(); expandPages(); return 0;
 }
