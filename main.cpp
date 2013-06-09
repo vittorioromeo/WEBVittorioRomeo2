@@ -1,23 +1,20 @@
-
 #include <string>
 #include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <ctemplate/template.h>
-#include <boost/filesystem.hpp>
 #include <SSVJsonCpp/SSVJsonCpp.h>
 #include <SSVUtils/SSVUtils.h>
 #include <SSVUtilsJson/SSVUtilsJson.h>
 
 using namespace std;
-using namespace boost::filesystem;
 using namespace ctemplate;
 using namespace ssvu;
 using namespace ssvu::FileSystem;
 using namespace ssvuj;
 
-int getDepth(path mPath) { return getCharCount(mPath.string(), '/') + getCharCount(mPath.string(), '\\'); }
+int getDepth(const string& mPath) { return getCharCount(mPath, '/') + getCharCount(mPath, '\\'); }
 
 string getResourcesFolderPath(int mDepth)
 {
@@ -112,18 +109,18 @@ struct Main
 
 struct Page
 {
-	path myPath;
+	string myPath;
 	Json::Value root;
 
 	MainMenu mainMenu;
 	Main main;
 
-	Page(path mPath, Json::Value mRoot) : myPath{mPath}, root{mRoot}
+	Page(const string& mPath, Json::Value mRoot) : myPath{mPath}, root{mRoot}
 	{
 		mainMenu = MainMenu{getRootFromFile("Json/mainMenu.json")};
 
-		string pageFolder{path{myPath}.remove_leaf().string()};
-		string entriesFolder{pageFolder + "/Entries/"}, asidesFolder{pageFolder + "/Asides/"};
+		string pageFolder{getParentPath(myPath)};
+		string entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
 
 		vector<string> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)}, asidePaths{getScan<Mode::Recurse, Type::File>(asidesFolder)};
 
@@ -139,7 +136,7 @@ struct Page
 
 	void appendEntry(Json::Value mRoot) { if(mRoot.isMember("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
 
-	path getResultPath() const { return path("Result/" + root["fileName"].asString()); }
+	string getResultPath() const { return "Result/" + root["fileName"].asString(); }
 
 	string getOutput()
 	{
@@ -185,12 +182,12 @@ void expandPages()
 	for(auto& p : pages)
 	{
 		// Check path
-		path parentPath{p.getResultPath().remove_leaf()};
-		log("Checking if path exists: " + parentPath.string(), "expandPages");
-		if(!exists(parentPath)) createFolder(parentPath.string());
+		string parentPath{getParentPath(p.getResultPath())};
+		log("Checking if path exists: " + parentPath, "expandPages");
+		if(!exists(parentPath)) createFolder(parentPath);
 
 		// Write page to file
-		string resultPath{p.getResultPath().string()};
+		string resultPath{p.getResultPath()};
 
 		log("> " + resultPath, "expandPages");
 		ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
@@ -203,8 +200,17 @@ void expandPages()
 		while(getline(inFile, line)) if(!line.empty()) outFile << line;
 
 		inFile.close(); outFile.flush(); outFile.close();
-		remove(p.getResultPath().string() + "temp");
+		removeFile(p.getResultPath() + "temp");
 	}
 }
 
-int main() { loadPages(); expandPages(); return 0; }
+int main()
+{
+	//log(getParentPath("/usr/local/test/a"));
+	//return 0;
+
+	//for(auto& x :/home/vittorioromeo/OHWorkspace/WEBVittorioRomeo2/_RELEASE/Json/Pages/Index/Entries/ getScan<Mode::Recurse>("/home/vittorioromeo/OHWorkspace/WEBVittorioRomeo2/_RELEASE/Json/Pages/Index/Entries/")) log(x); return 0;
+
+
+	loadPages(); expandPages(); return 0;
+}
