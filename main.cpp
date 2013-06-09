@@ -3,13 +3,11 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <ctemplate/template.h>
 #include <SSVJsonCpp/SSVJsonCpp.h>
 #include <SSVUtils/SSVUtils.h>
 #include <SSVUtilsJson/SSVUtilsJson.h>
 
 using namespace std;
-using namespace ctemplate;
 using namespace ssvu;
 using namespace ssvu::FileSystem;
 using namespace ssvu::TemplateSystem;
@@ -20,91 +18,50 @@ int getDepth(const string& mPath) { return getCharCount(mPath, '/') + getCharCou
 string getResourcesFolderPath(int mDepth)
 {
 	string s{"../"}, result{""};
-
 	for(int i{0}; i < mDepth; ++i) result += s;
 	return result + "Resources";
 }
 
-void fillDict(TemplateDictionary* mDict, Json::Value mValue)
+Dictionary getDictionaryFromJson(const Json::Value& mValue)
 {
-	for(Json::ValueIterator itr{mValue.begin()}; itr != mValue.end(); ++itr) mDict->SetValue(itr.key().asString(), (*itr).asString());
+	Dictionary result;
+	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[itr.key().asString()] = (*itr).asString();
+	return result;
 }
-
-// ---
 
 struct MainMenu
 {
 	Json::Value root;
 
-	string getOutput()
+	string getOutput() const
 	{
-		Json::Value menuItems{root["MenuItems"]};
-		string result;
-		TemplateDictionary dict{"mainMenu"};
-
-		for(auto& i : as<vector<Json::Value>>(menuItems))
-		{
-			TemplateDictionary* subDict{dict.AddSectionDictionary("MenuItems")};
-			fillDict(subDict, i);
-		}
-
-		ExpandTemplate("Templates/Base/mainMenu.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
-		return result;
+		Dictionary dict;
+		for(const auto& i : root["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
+		return dict.getExpanded(getFileContents("Templates/Base/mainMenu.tpl"));
 	}
 };
 
 struct Main
 {
-	vector<string> expandedEntries, expandedAsides;
+	vector<string> expandedEntries{""}, expandedAsides{""};
 
-	void expandItem(const string& mTemplatePath, Json::Value mToExpand, const string& mDictName, vector<string>& mTargetVector)
+	void expandItem(const string& mTplPath, const Json::Value& mRoot, vector<string>& mTarget) { mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath))); }
+
+	void addEntry(const Json::Value& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries); }
+	void addAside(const Json::Value& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
+	void addMenu(const Json::Value& mRoot)
 	{
-		string result;
-		TemplateDictionary dict(mDictName);
-
-		fillDict(&dict, mToExpand);
-
-		ExpandTemplate(mTemplatePath, ctemplate::DO_NOT_STRIP, &dict, &result);
-		mTargetVector.push_back(result);
+		Dictionary dict;
+		for(const auto& i : mRoot["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
+		expandedEntries.push_back(dict.getExpanded(getFileContents("Templates/Entries/menu.tpl")));
 	}
 
-	void addEntry(Json::Value mRoot) { expandItem(mRoot["Template"].asString(), mRoot["ToExpand"], "entry", expandedEntries); }
-	void addAside(Json::Value mRoot) { expandItem(mRoot["Template"].asString(), mRoot["ToExpand"], "aside", expandedAsides); }
-	void addMenu(Json::Value mRoot)
+	string getOutput() const
 	{
-		Json::Value menuItems{mRoot["MenuItems"]};
-		string result;
-		TemplateDictionary dict{"menu"};
-
-		for(auto& i : as<vector<Json::Value>>(menuItems))
-		{
-			TemplateDictionary* subDict{dict.AddSectionDictionary("MenuItems")};
-			fillDict(subDict, i);
-		}
-
-		ExpandTemplate("Templates/Entries/menu.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
-		expandedEntries.push_back(result);
-	}
-
-	string getOutput()
-	{
-		string result;
-		TemplateDictionary dict("main");
-
-		for(const auto& e : expandedEntries)
-		{
-			TemplateDictionary* subDict{dict.AddSectionDictionary("Entries")};
-			subDict->SetValue("Entry", e);
-		}
-
-		for(const auto& a : expandedAsides)
-		{
-			TemplateDictionary* subDict{dict.AddSectionDictionary("Asides")};
-			subDict->SetValue("Aside", a);
-		}
-
-		ExpandTemplate("Templates/Base/main.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
-		return result;
+		Dictionary dict;
+		for(const auto& e : expandedEntries) dict += {"Entries", {{"Entry", e}}};
+		for(const auto& a : expandedAsides) dict += {"Asides", {{"Aside", a}}};
+		return dict.getExpanded(getFileContents("Templates/Base/main.tpl"));
 	}
 };
 
@@ -113,13 +70,11 @@ struct Page
 	string myPath;
 	Json::Value root;
 
-	MainMenu mainMenu;
+	MainMenu mainMenu{getRootFromFile("Json/mainMenu.json")};
 	Main main;
 
-	Page(const string& mPath, Json::Value mRoot) : myPath{mPath}, root{mRoot}
+	Page(const string& mPath, const Json::Value& mRoot) : myPath{mPath}, root{mRoot}
 	{
-		mainMenu = MainMenu{getRootFromFile("Json/mainMenu.json")};
-
 		string pageFolder{getParentPath(myPath)};
 		string entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
 
@@ -130,32 +85,24 @@ struct Page
 			Json::Value root{getRootFromFile(s)};
 
 			if(!root.isMember("Entries")) appendEntry(root);
-			else for(Json::Value value : root["Entries"]) appendEntry(value);
+			else for(const auto& v : root["Entries"]) appendEntry(v);
 		}
 		for(const auto& s : asidePaths) main.addAside(getRootFromFile(s));
 	}
 
 	void appendEntry(Json::Value mRoot) { if(mRoot.isMember("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
 
-	string getResultPath() const { return "Result/" + root["fileName"].asString(); }
+	string getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
 
-	string getOutput()
+	string getOutput() const
 	{
 		string resourcesPath{getResourcesFolderPath(getDepth(getResultPath()) - 1)};
 
-		string result;
-		TemplateDictionary dict("page");
+		Dictionary dict;
 		dict["MainMenu"] = mainMenu.getOutput();
 		dict["Main"] = main.getOutput();
 		dict["ResourcesPath"] = resourcesPath;
-		ExpandTemplate("Templates/page.tpl", ctemplate::DO_NOT_STRIP, &dict, &result);
-		StringToTemplateCache(root["fileName"].asString(), result, ctemplate::DO_NOT_STRIP);
-
-		string finalResult;
-		TemplateDictionary dict2("page2");
-		dict2["ResourcesPath"] = resourcesPath;
-		ExpandTemplate(root["fileName"].asString(), ctemplate::DO_NOT_STRIP, &dict2, &finalResult);
-		return finalResult;
+		return dict.getExpanded(getFileContents("Templates/page.tpl"));
 	}
 };
 
@@ -205,27 +152,4 @@ void expandPages()
 	}
 }
 
-
-int main()
-{
-	// TODO: cool c++11 initializer list syntax for dictionaries
-	// TODO: template system helpers for files
-
-	Dictionary innerChild;
-	innerChild.setStringReplacement("ichildKey", "dreaming...");
-
-	Dictionary child;
-	child.setStringReplacement("childKey", "childValue");
-	child.addSectionReplacement("iSection", innerChild);
-
-	Dictionary main;
-	main.setStringReplacement("testKey", "testValue");
-	main.addSectionReplacement("testSection", child);
-	main.addSectionReplacement("testSection", child);
-
-	string s = main.getExpanded("a{{#testSection}} \n this is child value: {{childKey}}a  and this is a inner section {{#iSection}} \n inner child value: {{ichildKey}}   {{/iSection}}\n{{/testSection}}\nr ... testKey hahaaaa testCock {{testKey}} banana {{testKey}}");
-	log(s);
-
-	return 0;
-	loadPages(); expandPages(); return 0;
-}
+int main() { loadPages(); expandPages(); return 0; }
