@@ -19,7 +19,7 @@
 		{
 			"MenuItems":
 			[
-				{ "Title": "1.91(win)", 				"Link": "/Downloads/OpenHexagon/OpenHexagonV1.91.7z" },
+				{ "Title": "1.91(win)", 			"Link": "/Downloads/OpenHexagon/OpenHexagonV1.91.7z" },
 				{ "Title": "updater(win)", 			"Link": "/Downloads/OpenHexagon/OHAutoUpdaterV1.0.7z" },
 				{ "Title": "1.9(linux targz)",		"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.9.tar.gz" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
