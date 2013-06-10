@@ -6,6 +6,22 @@
 
 			"ToExpand":
 			{
+				"Title": "reinventing the wheel + etc",
+				"Text": "<p>In the latest months I've been mostly working on my libraries that you can find on GitHub.</br>
+						I've \"reinvented\" the wheel by creating my own cross-platform filesystem and my own template system (similar to CTemplate). You can find both of them in SSVUtils, on my GitHub page. Pull requests and comments are greatly appreciated!</br>
+						I am happy to announce that the newest version of this website is generated using those libraries, without any Boost or CTemplate dependency.</p>
+						<p>Other news: real life is taking a lot of time away from programming. I will have my finals this month, and then I'll get into computer science education as soon as possible.</p>
+						<p>I've also added a donation button to the website: since I'm currently unemployed every donation would be really helpful, especially in paying the server. Consider donating if you like my work :)</p>
+						<p>Hopefully I'll find the time to make some new tutorials/youtube videos before my finals. Stay tuned!</p>
+						<hr>",
+				"Date": "10 june 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "back to work, update",
 				"Text": "<p>Hello everyone, I've been on vacation for a week and I'm back at home now. I'm very busy with school (final exams are in about 1 month), but I will use most of my spare time to work on my projects.</p>
 						<p>Current development is on Open Hexagon updates, but also on my libraries and on experimental prototypes. I've also added a donation button to the site, which you can use if you'd like to support my work.</p>
