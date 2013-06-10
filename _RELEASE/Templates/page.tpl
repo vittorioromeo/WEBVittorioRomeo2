@@ -70,7 +70,13 @@
                                     <img src="{{ResourcesPath}}/img/socialTwitter.png" width="45" height="45">
                                     <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialTwitterGray.png" width="45" height="45"> </div>
                                 </a>
-                            </div>           
+                            </div>          
+                            <div class="socialIcon">
+                                <a href="http://stackexchange.com/users/294676/vee" target="_blank"> 
+                                    <img src="{{ResourcesPath}}/img/socialStackExchange.png" width="45" height="45">
+                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialStackExchangeGray.png" width="45" height="45"> </div>
+                                </a>
+                            </div>      
                         </div>
                     </aside>
                 </div>
