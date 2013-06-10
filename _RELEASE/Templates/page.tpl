@@ -43,32 +43,32 @@
                         <div class="socialIcons">
                             <div class="socialIcon">
                                 <a href="mailto:vittorio.romeo@outlook.com" target="_blank"> 
-                                    <img src="{{ResourcesPath}}/img/socialEmail.png" width="53" height="53">
-                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialEmailGray.png" width="53" height="53"> </div>
+                                    <img src="{{ResourcesPath}}/img/socialEmail.png" width="45" height="45">
+                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialEmailGray.png" width="45" height="45"> </div>
                                 </a>
                             </div>
                             <div class="socialIcon">
                                 <a href="http://www.facebook.com/vittorioromeovee" target="_blank"> 
-                                    <img src="{{ResourcesPath}}/img/socialFacebook.png" width="53" height="53">
-                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialFacebookGray.png" width="53" height="53"> </div>
+                                    <img src="{{ResourcesPath}}/img/socialFacebook.png" width="45" height="45">
+                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialFacebookGray.png" width="45" height="45"> </div>
                                 </a>
                             </div>
                             <div class="socialIcon">
                                 <a href="https://github.com/SuperV1234" target="_blank"> 
-                                    <img src="{{ResourcesPath}}/img/socialGitHub.png" width="53" height="53">
-                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialGitHubGray.png" width="53" height="53"> </div>
+                                    <img src="{{ResourcesPath}}/img/socialGitHub.png" width="45" height="45">
+                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialGitHubGray.png" width="45" height="45"> </div>
                                 </a>
                             </div>
                             <div class="socialIcon">
                                 <a href="http://www.youtube.com/user/SuperVictorius" target="_blank"> 
-                                    <img src="{{ResourcesPath}}/img/socialYouTube.png" width="53" height="53">
-                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialYouTubeGray.png" width="53" height="53"> </div>
+                                    <img src="{{ResourcesPath}}/img/socialYouTube.png" width="45" height="45">
+                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialYouTubeGray.png" width="45" height="45"> </div>
                                 </a>
                             </div>
                             <div class="socialIcon">
                                 <a href="https://twitter.com/supahvee1234" target="_blank"> 
-                                    <img src="{{ResourcesPath}}/img/socialTwitter.png" width="53" height="53">
-                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialTwitterGray.png" width="53" height="53"> </div>
+                                    <img src="{{ResourcesPath}}/img/socialTwitter.png" width="45" height="45">
+                                    <div class="socialIconGray"> <img src="{{ResourcesPath}}/img/socialTwitterGray.png" width="45" height="45"> </div>
                                 </a>
                             </div>           
                         </div>
