@@ -10,7 +10,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 2px solid #cccccc;
+  border-top: 2px solid #ccc;
   margin: 0;
   margin-top: 25px;
   margin-bottom: -5px; }
@@ -132,9 +132,9 @@ nav a {
     text-align: right;
     padding: 0 15px;
     padding-bottom: 15px;
-    -webkit-box-shadow: 0 1px 5px #aaaaaa;
-    -moz-box-shadow: 0 1px 5px #aaaaaa;
-    box-shadow: 0 1px 5px #aaaaaa; }
+    -webkit-box-shadow: 0 1px 5px #aaa;
+    -moz-box-shadow: 0 1px 5px #aaa;
+    box-shadow: 0 1px 5px #aaa; }
     .main aside p {
       margin: 0; }
   .main .noBorderAside {
@@ -259,7 +259,7 @@ nav a {
     text-align: left; }
     @media only screen and (min-width: 600px) {
       .entryMenu ul {
-        overflow-x: scroll; } }
+        overflow-x: hidden; } }
     .entryMenu ul li {
       text-align: center;
       display: inline-block;
