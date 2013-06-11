@@ -6,6 +6,18 @@
 
 			"ToExpand":
 			{
+				"Title": "two new video tutorials available!",
+				"Text": "<p>I've created two tutorial videos where I explain how to speed up collision broad-phase detection using a 2D grid spatial partitioning algorithm.</br>
+						Check them out in the tutorials section!</p>
+						<hr>",
+				"Date": "11 june 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "reinventing the wheel + etc",
 				"Text": "<p>In the latest months I've been mostly working on my libraries that you can find on GitHub.</br>
 						I've \"reinvented\" the wheel by creating my own cross-platform filesystem and my own template system (similar to CTemplate). You can find both of them in SSVUtils, on my GitHub page. Pull requests and comments are greatly appreciated!</br>
