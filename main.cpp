@@ -13,7 +13,7 @@ using namespace ssvu::FileSystem;
 using namespace ssvu::TemplateSystem;
 using namespace ssvuj;
 
-int getDepth(const string& mPath) { return getCharCount(mPath, '/') + getCharCount(mPath, '\\'); }
+int getDepth(const string& mPath) { return getCharCount(getNormalizedPath(mPath), '/'); }
 
 string getResourcesFolderPath(int mDepth)
 {
