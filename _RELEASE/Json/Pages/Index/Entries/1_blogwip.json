@@ -6,6 +6,29 @@
 
 			"ToExpand":
 			{
+				"Title": "open hexagon v1.92 released",
+				"Text": "<p>Friend list and key customization added. (minor update)</br>
+						If you're using the auto updater to update, delete 'config.json' from your folder first!</p>
+						<hr>",
+				"Date": "15 june 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon auto updater v1.1 released",
+				"Text": "<p>Rewritten from scratch... opening the way for cross-platform updating.</p>
+						<hr>",
+				"Date": "15 june 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "two new video tutorials available!",
 				"Text": "<p>I've created two tutorial videos where I explain how to speed up collision broad-phase detection using a 2D grid spatial partitioning algorithm.</br>
 						Check them out in the tutorials section!</p>
