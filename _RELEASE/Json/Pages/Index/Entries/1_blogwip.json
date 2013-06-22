@@ -1,6 +1,18 @@
 {
 	"Entries":
 	[
+		 {
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "open hexagon v1.92 linux release",
+				"Text": "<p>Finally, a multi-architecture (both 32 and 64 bit) .tar.xz archive is available!</p>
+						<p>Download on the projects page, as usual. :)</p>
+						<hr>",
+				"Date": "22 june 2013"
+			}
+		},
 		{
 			"Template": "Templates/Entries/blog.tpl",
 
