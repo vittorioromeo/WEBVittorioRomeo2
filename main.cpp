@@ -28,7 +28,7 @@ string getResourcesFolderPath(int mDepth)
 Dictionary getDictionaryFromJson(const ssvuj::Value& mValue)
 {
 	Dictionary result;
-	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[itr.key().asString()] = (*itr).asString();
+	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[as<string>(itr.key())] = as<string>(*itr);
 	return result;
 }
 
@@ -87,13 +87,13 @@ struct Page
 		{
 			ssvuj::Value root{getRootFromFile(s)};
 
-			if(!root.isMember("Entries")) appendEntry(root);
+			if(!has(root, "Entries")) appendEntry(root);
 			else for(const auto& v : root["Entries"]) appendEntry(v);
 		}
 		for(const auto& s : asidePaths) main.addAside(getRootFromFile(s));
 	}
 
-	void appendEntry(ssvuj::Value mRoot) { if(mRoot.isMember("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
+	void appendEntry(ssvuj::Value mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
 
 	string getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
 
