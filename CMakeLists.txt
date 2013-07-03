@@ -24,7 +24,6 @@ include_directories(${SSVUTILSJSON_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_link_libraries(WEBVittorioRomeo2 ${SSVJSONCPP_LIBRARY})
 target_link_libraries(WEBVittorioRomeo2 ${SSVUTILS_LIBRARY})
-target_link_libraries(WEBVittorioRomeo2 ${SSVUTILSJSON_LIBRARY})
 
 if(UNIX)
 	install(TARGETS WEBVittorioRomeo2 RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/_RELEASE/)
