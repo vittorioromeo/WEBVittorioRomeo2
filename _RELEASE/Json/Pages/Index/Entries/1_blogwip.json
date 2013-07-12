@@ -1,7 +1,19 @@
 {
 	"Entries":
 	[
-		 {
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "done with school finals",
+				"Text": "<p>Today was the last day of school finals. I'm very happy about how my exams went and even happier that I finally have a lot more free time!</p>
+						<p>I've also been working on Open Hexagon 2.0, which will be a big gameplay update with new levels and mechanics. Check the beta out on the official Facebook page.</p>
+						<hr>",
+				"Date": "11 july 2013"
+			}
+		},
+		{
 			"Template": "Templates/Entries/blog.tpl",
 
 			"ToExpand":
