@@ -114,35 +114,35 @@ vector<Page> pages;
 
 void loadPages()
 {
-	log("Getting all page.json files", "loadPages");
+	lo << lt("loadPages") << "Getting all page.json files" << endl;
 
 	string pagesPath("Json/Pages/");
 	vector<string> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
 
 	for(const auto& s : pageJsonPaths)
 	{
-		log("> " + s, "loadPages");
+		lo << lt("loadPages") << "> " << s << endl;
 		pages.push_back(Page{s, getRootFromFile(s)});
 	}
 }
 
 void expandPages()
 {
-	log("Writing pages to result", "expandPages");
+	lo << lt("expandPages") << "Writing pages to result" << endl;
 
 	for(auto& p : pages)
 	{
 		// Check path
 		string parentPath{getParentPath(p.getResultPath())};
-		log("Checking if path exists: " + parentPath, "expandPages");
+		lo << lt("expandPages") << "Checking if path exists: " << parentPath << endl;
 		if(!exists(parentPath)) createFolder(parentPath);
 
 		// Write page to file
 		string resultPath{p.getResultPath()};
 
-		log("> " + resultPath, "expandPages");
+		lo << lt("expandPages") << "> " << resultPath << endl;
 		ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
-		log("");
+		lo << endl;
 
 		ifstream inFile(resultPath + "temp");
 		ofstream outFile(resultPath);
