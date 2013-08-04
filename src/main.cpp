@@ -20,7 +20,7 @@ int getDepth(const string& mPath) { return getCharCount(getNormalizedPath(mPath)
 
 string getResourcesFolderPath(int mDepth)
 {
-	string s{"../"}, result{""};
+	string s{"../"}, result;
 	for(int i{0}; i < mDepth; ++i) result += s;
 	return result + "Resources";
 }
@@ -46,7 +46,7 @@ struct MainMenu
 
 struct Main
 {
-	vector<string> expandedEntries{""}, expandedAsides{""};
+	vector<string> expandedEntries, expandedAsides;
 
 	void expandItem(const string& mTplPath, const ssvuj::Value& mRoot, vector<string>& mTarget) { mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath))); }
 
