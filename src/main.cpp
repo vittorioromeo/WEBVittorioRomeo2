@@ -2,6 +2,9 @@
 // License: Academic Free License ("AFL") v. 3.0
 // AFL License page: http://opensource.org/licenses/AFL-3.0
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <string>
 #include <fstream>
 #include <string>
@@ -9,6 +12,9 @@
 #include <vector>
 #include <SSVUtils/SSVUtils.h>
 #include <SSVUtilsJson/SSVUtilsJson.h>
+extern "C" {
+	#include <mkdio.h>
+}
 
 using namespace std;
 using namespace ssvu;
@@ -48,9 +54,30 @@ struct Main
 {
 	vector<string> expandedEntries, expandedAsides;
 
-	void expandItem(const string& mTplPath, const ssvuj::Value& mRoot, vector<string>& mTarget) { mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath))); }
+	void expandItem(const string& mTplPath, ssvuj::Value mRoot, vector<string>& mTarget, const std::string& mPagePath = "")
+	{
+		if(ssvuj::has(mRoot, "Markdown"))
+		{
+			auto mdPath = getNormalizedPath(getParentPath(mPagePath) + "Entries/" + ssvuj::as<string>(mRoot, "Markdown"));
+			auto mdResPath = getNormalizedPath(mdPath + ".tmp");
 
-	void addEntry(const ssvuj::Value& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries); }
+			// I HATE THIS
+			FILE* f1 = fopen(mdPath.c_str(), "r");
+			FILE* f2 = fopen(mdResPath.c_str(), "w");
+			MMIOT* in = mkd_in(f1, 0);
+			markdown(in, f2, 0);
+			fclose(f1);
+			fclose(f2);
+
+			ssvuj::set(mRoot, "Text", getFileContents(mdResPath));
+
+			removeFile(mdResPath);
+		}
+
+		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
+	}
+
+	void addEntry(const ssvuj::Value& mRoot, const std::string& mPagePath) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
 	void addAside(const ssvuj::Value& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
 	void addMenu(const ssvuj::Value& mRoot)
 	{
@@ -85,6 +112,7 @@ struct Page
 
 		for(const auto& s : entryPaths)
 		{
+			if(!endsWith(s, ".json")) continue;
 			ssvuj::Value root{getRootFromFile(s)};
 
 			if(!has(root, "Entries")) appendEntry(root);
@@ -93,7 +121,7 @@ struct Page
 		for(const auto& s : asidePaths) main.addAside(getRootFromFile(s));
 	}
 
-	void appendEntry(ssvuj::Value mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot); }
+	void appendEntry(ssvuj::Value mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
 
 	string getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
 
@@ -148,7 +176,7 @@ void expandPages()
 		ofstream outFile(resultPath);
 
 		string line;
-		while(getline(inFile, line)) if(!line.empty()) outFile << line;
+		while(getline(inFile, line)) if(!line.empty()) outFile << line << "\n";
 
 		inFile.close(); outFile.flush(); outFile.close();
 		removeFile(p.getResultPath() + "temp");
