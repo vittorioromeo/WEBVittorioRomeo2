@@ -81,7 +81,7 @@
 <p>Writing blog posts is now <strong>much easier</strong>!</p>
 <p></br></p>
 <h3>ffmpeg, twitch.tv</h3>
-<p>I&rsquo;ve also started <em>occasionally</em> streaming myself code on <a href="http://twitch.tv">twitch.tv</a>. It was painful to set up, but these are the commands I use:</p>
+<p>I&rsquo;ve also started <em>occasionally</em> streaming myself code on <a href="http://twitch.tv/superv1234">twitch.tv</a>. It was painful to set up, but these are the commands I use:</p>
 <ul>
 <li><p>Setting up loopbacks to record both microphone and pc audio</p>
 <pre><code>  #!/bin/bash
@@ -93,6 +93,9 @@
 <pre><code>  #!/bin/bash
   KEY="&lt;your twitch.tv key here&gt;"
   ffmpeg -f x11grab -s 1920x1080 -r 20 -i :0.0+1680,0 -f alsa -ac 2 -i pulse -c:v libx264 -preset ultrafast -pix_fmt yuv420p -s 1920x1080 -threads 4 -acodec libmp3lame -ar 22050 -qscale 3 -b 712000 -bufsize 512k -af aresample=44100 -f flv "rtmp://live-ams.twitch.tv/app/$KEY"
+</code></pre></li>
+<li><p>After launching the stream</p>
+<pre><code>  pavucontrol # to set up loopbacks redirection
 </code></pre></li>
 </ul>
 <p></br></p>
