@@ -52,7 +52,7 @@ struct MainMenu
 
 struct Main
 {
-	vector<string> expandedEntries, expandedAsides;
+	vector<string> expandedEntries{""}, expandedAsides{""};
 
 	void expandItem(const string& mTplPath, ssvuj::Value mRoot, vector<string>& mTarget, const std::string& mPagePath = "")
 	{
