@@ -31,7 +31,7 @@ string getResourcesFolderPath(int mDepth)
 	return result + "Resources";
 }
 
-Dictionary getDictionaryFromJson(const ssvuj::Value& mValue)
+Dictionary getDictionaryFromJson(const ssvuj::Obj& mValue)
 {
 	Dictionary result;
 	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[as<string>(itr.key())] = as<string>(*itr);
@@ -40,7 +40,7 @@ Dictionary getDictionaryFromJson(const ssvuj::Value& mValue)
 
 struct MainMenu
 {
-	ssvuj::Value root;
+	ssvuj::Obj root;
 
 	string getOutput() const
 	{
@@ -54,7 +54,7 @@ struct Main
 {
 	vector<string> expandedEntries{""}, expandedAsides{""};
 
-	void expandItem(const string& mTplPath, ssvuj::Value mRoot, vector<string>& mTarget, const std::string& mPagePath = "")
+	void expandItem(const string& mTplPath, ssvuj::Obj mRoot, vector<string>& mTarget, const std::string& mPagePath = "")
 	{
 		if(ssvuj::has(mRoot, "Markdown"))
 		{
@@ -77,9 +77,9 @@ struct Main
 		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
 	}
 
-	void addEntry(const ssvuj::Value& mRoot, const std::string& mPagePath) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
-	void addAside(const ssvuj::Value& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
-	void addMenu(const ssvuj::Value& mRoot)
+	void addEntry(const ssvuj::Obj& mRoot, const std::string& mPagePath) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
+	void addAside(const ssvuj::Obj& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
+	void addMenu(const ssvuj::Obj& mRoot)
 	{
 		Dictionary dict;
 		for(const auto& i : mRoot["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
@@ -98,12 +98,12 @@ struct Main
 struct Page
 {
 	string myPath;
-	ssvuj::Value root;
+	ssvuj::Obj root;
 
-	MainMenu mainMenu{getRootFromFile("Json/mainMenu.json")};
+	MainMenu mainMenu{readFromFile("Json/mainMenu.json")};
 	Main main;
 
-	Page(const string& mPath, const ssvuj::Value& mRoot) : myPath{mPath}, root{mRoot}
+	Page(const string& mPath, const ssvuj::Obj& mRoot) : myPath{mPath}, root{mRoot}
 	{
 		string pageFolder{getParentPath(myPath)};
 		string entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
@@ -113,15 +113,15 @@ struct Page
 		for(const auto& s : entryPaths)
 		{
 			if(!endsWith(s, ".json")) continue;
-			ssvuj::Value root{getRootFromFile(s)};
+			ssvuj::Obj root{readFromFile(s)};
 
 			if(!has(root, "Entries")) appendEntry(root);
 			else for(const auto& v : root["Entries"]) appendEntry(v);
 		}
-		for(const auto& s : asidePaths) main.addAside(getRootFromFile(s));
+		for(const auto& s : asidePaths) main.addAside(readFromFile(s));
 	}
 
-	void appendEntry(ssvuj::Value mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
+	void appendEntry(ssvuj::Obj mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
 
 	string getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
 
@@ -150,7 +150,7 @@ void loadPages()
 	for(const auto& s : pageJsonPaths)
 	{
 		lo << lt("loadPages") << "> " << s << endl;
-		pages.push_back(Page{s, getRootFromFile(s)});
+		pages.push_back(Page{s, readFromFile(s)});
 	}
 }
 
