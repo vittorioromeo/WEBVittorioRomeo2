@@ -12,6 +12,7 @@
 #include <vector>
 #include <SSVUtils/SSVUtils.h>
 #include <SSVUtilsJson/SSVUtilsJson.h>
+#include <DiscountCpp/DiscountCpp.h>
 extern "C" {
 	#include <mkdio.h>
 }
@@ -59,19 +60,7 @@ struct Main
 		if(ssvuj::has(mRoot, "Markdown"))
 		{
 			auto mdPath = getNormalizedPath(getParentPath(mPagePath) + "Entries/" + ssvuj::as<string>(mRoot, "Markdown"));
-			auto mdResPath = getNormalizedPath(mdPath + ".tmp");
-
-			// I HATE THIS
-			FILE* f1 = fopen(mdPath.c_str(), "r");
-			FILE* f2 = fopen(mdResPath.c_str(), "w");
-			MMIOT* in = mkd_in(f1, 0);
-			markdown(in, f2, 0);
-			fclose(f1);
-			fclose(f2);
-
-			ssvuj::set(mRoot, "Text", getFileContents(mdResPath));
-
-			removeFile(mdResPath);
+			ssvuj::set(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
 		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
