@@ -94,5 +94,8 @@
         <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
         <script>window.jQuery || document.write('<script src="{{ResourcesPath}}/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         <script src="{{ResourcesPath}}/js/jquery.animate-colors-min.js"></script> <script src="{{ResourcesPath}}/js/main.js"></script>
+        <link rel="stylesheet" href="{{ResourcesPath}}/js/styles/github.css">
+        <script src="{{ResourcesPath}}/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

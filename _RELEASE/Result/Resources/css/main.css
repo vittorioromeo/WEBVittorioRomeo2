@@ -27,7 +27,9 @@ textarea {
   resize: vertical; }
 
 code {
+  display:block;
   font-size: 11px;
+  background-color: gray;
 }
 
 .wrapper {

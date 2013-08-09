@@ -13,9 +13,6 @@
 #include <SSVUtils/SSVUtils.h>
 #include <SSVUtilsJson/SSVUtilsJson.h>
 #include <DiscountCpp/DiscountCpp.h>
-extern "C" {
-	#include <mkdio.h>
-}
 
 using namespace std;
 using namespace ssvu;

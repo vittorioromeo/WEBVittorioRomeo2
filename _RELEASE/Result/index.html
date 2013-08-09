@@ -75,6 +75,39 @@
     
         <section>
     <div class="entryTitle"> 
+    	<h2>cppdiscount<div class="blogDate">09 august 2013</div></h2> 
+    </div>
+    <div class="entryText">
+    	<div class="blogEntry">
+        	<p>After adding <a href="http://www.pell.portland.or.us/~orc/Code/discount/">discount</a> to <a href="https://github.com/SuperV1234/WEBVittorioRomeo2">my static website generator</a>, I was unsatisfied with the C code introduced in my project:</p>
+<pre><code>extern "C" 
+{
+    #include &lt;mkdio.h&gt;
+}
+// ...
+FILE* f1 = fopen(mdPath.c_str(), "r");
+FILE* f2 = fopen(mdResPath.c_str(), "w");
+MMIOT* in = mkd_in(f1, 0);
+markdown(in, f2, 0);
+fclose(f1);
+fclose(f2);
+</code></pre>
+<p>I looked for alternatives, but I couldn&rsquo;t find any native C++ Markdown library or any C++ wrapper for C Markdown libaries.
+So I decided to create a <a href="https://github.com/SuperV1234/DiscountCpp">C++11 wrapper for discount, called DiscountCpp</a>. It currently implements very few functions from Discount, but offers a very easy-to-use interface to quickly convert Markdown to HTML.</p>
+<p>The updated code looks like this:</p>
+<pre><code>#include &lt;DiscountCpp/DiscountCpp.h&gt;
+// ...
+discountcpp::getHTMLFromMarkdownFile(mdPath);
+</code></pre>
+<p><em>Now I can sleep in peace.</em></p>
+<p>P.S.: I also implemented syntax highlighting on the site thanks to <a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a>.</p>
+<hr />
+    	</div> 
+	</div>
+</section>      
+    
+        <section>
+    <div class="entryTitle"> 
     	<h2>markdown and more<div class="blogDate">07 august 2013</div></h2> 
     </div>
     <div class="entryText">
@@ -469,5 +502,8 @@
         <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
         <script>window.jQuery || document.write('<script src="Resources/js/vendor/jquery-1.8.3.min.js"><\/script>')</script>
         <script src="Resources/js/jquery.animate-colors-min.js"></script> <script src="Resources/js/main.js"></script>
+        <link rel="stylesheet" href="Resources/js/styles/github.css">
+        <script src="Resources/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>
