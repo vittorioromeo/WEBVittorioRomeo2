@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "cppdiscount",
+				"Markdown": "mdEntries/1.md",
+				"Date": "09 august 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "markdown and more",
 				"Markdown": "mdEntries/0.md",
 				"Date": "07 august 2013"
