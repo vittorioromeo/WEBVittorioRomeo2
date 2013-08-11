@@ -136,7 +136,7 @@ void loadPages()
 	for(const auto& s : pageJsonPaths)
 	{
 		lo << lt("loadPages") << "> " << s << endl;
-		pages.push_back(Page{s, readFromFile(s)});
+		pages.emplace_back(s, readFromFile(s));
 	}
 }
 
