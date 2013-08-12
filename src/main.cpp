@@ -20,9 +20,9 @@ using namespace ssvu::FileSystem;
 using namespace ssvu::TemplateSystem;
 using namespace ssvuj;
 
-int getDepth(const string& mPath) { return getCharCount(getNormalizedPath(mPath), '/'); }
+int getDepth(const Path& mPath) { return getCharCount(mPath, '/'); }
 
-string getResourcesFolderPath(int mDepth)
+Path getResourcesFolderPath(int mDepth)
 {
 	string s{"../"}, result;
 	for(int i{0}; i < mDepth; ++i) result += s;
@@ -52,18 +52,19 @@ struct Main
 {
 	vector<string> expandedEntries{""}, expandedAsides{""};
 
-	void expandItem(const string& mTplPath, ssvuj::Obj mRoot, vector<string>& mTarget, const std::string& mPagePath = "")
+	void expandItem(const string& mTplPath, ssvuj::Obj mRoot, vector<string>& mTarget, const Path& mPagePath = "")
 	{
 		if(ssvuj::has(mRoot, "Markdown"))
 		{
-			auto mdPath = getNormalizedPath(getParentPath(mPagePath) + "Entries/" + ssvuj::as<string>(mRoot, "Markdown"));
+			Path mdPath = getParentPath(mPagePath) + "Entries/" + ssvuj::as<string>(mRoot, "Markdown");
 			ssvuj::set(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
+
 
 		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
 	}
 
-	void addEntry(const ssvuj::Obj& mRoot, const std::string& mPagePath) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
+	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
 	void addAside(const ssvuj::Obj& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
 	void addMenu(const ssvuj::Obj& mRoot)
 	{
@@ -83,18 +84,18 @@ struct Main
 
 struct Page
 {
-	string myPath;
+	Path myPath;
 	ssvuj::Obj root;
 
 	MainMenu mainMenu{readFromFile("Json/mainMenu.json")};
 	Main main;
 
-	Page(const string& mPath, const ssvuj::Obj& mRoot) : myPath{mPath}, root{mRoot}
+	Page(const Path& mPath, const ssvuj::Obj& mRoot) : myPath{mPath}, root{mRoot}
 	{
-		string pageFolder{getParentPath(myPath)};
-		string entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
+		Path pageFolder{getParentPath(myPath)};
+		Path entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
 
-		vector<string> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)}, asidePaths{getScan<Mode::Recurse, Type::File>(asidesFolder)};
+		vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)}, asidePaths{getScan<Mode::Recurse, Type::File>(asidesFolder)};
 
 		for(const auto& s : entryPaths)
 		{
@@ -107,13 +108,13 @@ struct Page
 		for(const auto& s : asidePaths) main.addAside(readFromFile(s));
 	}
 
-	void appendEntry(ssvuj::Obj mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
+	void appendEntry(const ssvuj::Obj& mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
 
-	string getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
+	Path getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
 
 	string getOutput() const
 	{
-		string resourcesPath{getResourcesFolderPath(getDepth(getResultPath()) - 1)};
+		Path resourcesPath{getResourcesFolderPath(getDepth(getResultPath()) - 1)};
 
 		Dictionary dict;
 		dict["MainMenu"] = mainMenu.getOutput();
@@ -130,8 +131,8 @@ void loadPages()
 {
 	lo << lt("loadPages") << "Getting all page.json files" << endl;
 
-	string pagesPath("Json/Pages/");
-	vector<string> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
+	Path pagesPath("Json/Pages/");
+	vector<Path> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
 
 	for(const auto& s : pageJsonPaths)
 	{
@@ -147,12 +148,12 @@ void expandPages()
 	for(auto& p : pages)
 	{
 		// Check path
-		string parentPath{getParentPath(p.getResultPath())};
+		Path parentPath{getParentPath(p.getResultPath())};
 		lo << lt("expandPages") << "Checking if path exists: " << parentPath << endl;
 		if(!exists(parentPath)) createFolder(parentPath);
 
 		// Write page to file
-		string resultPath{p.getResultPath()};
+		Path resultPath{p.getResultPath()};
 
 		lo << lt("expandPages") << "> " << resultPath << endl;
 		ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
