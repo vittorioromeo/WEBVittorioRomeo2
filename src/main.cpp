@@ -52,7 +52,7 @@ struct Main
 {
 	vector<string> expandedEntries{""}, expandedAsides{""};
 
-	void expandItem(const string& mTplPath, ssvuj::Obj mRoot, vector<string>& mTarget, const Path& mPagePath = "")
+	void expandItem(const Path& mTplPath, ssvuj::Obj mRoot, vector<string>& mTarget, const Path& mPagePath = "")
 	{
 		if(ssvuj::has(mRoot, "Markdown"))
 		{
