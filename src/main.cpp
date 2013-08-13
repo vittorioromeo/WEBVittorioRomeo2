@@ -56,7 +56,7 @@ struct Main
 	{
 		if(ssvuj::has(mRoot, "Markdown"))
 		{
-			Path mdPath = getParentPath(mPagePath) + "Entries/" + ssvuj::as<string>(mRoot, "Markdown");
+			Path mdPath{mPagePath.getParent() + "Entries/" + ssvuj::as<string>(mRoot, "Markdown")};
 			ssvuj::set(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
@@ -92,7 +92,7 @@ struct Page
 
 	Page(const Path& mPath, const ssvuj::Obj& mRoot) : myPath{mPath}, root{mRoot}
 	{
-		Path pageFolder{getParentPath(myPath)};
+		Path pageFolder{myPath.getParent()};
 		Path entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
 
 		vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)}, asidePaths{getScan<Mode::Recurse, Type::File>(asidesFolder)};
@@ -148,7 +148,7 @@ void expandPages()
 	for(auto& p : pages)
 	{
 		// Check path
-		Path parentPath{getParentPath(p.getResultPath())};
+		Path parentPath{p.getResultPath().getParent()};
 		lo << lt("expandPages") << "Checking if path exists: " << parentPath << endl;
 		if(!exists(parentPath)) createFolder(parentPath);
 
