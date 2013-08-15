@@ -100,10 +100,10 @@ struct Page
 		for(const auto& s : entryPaths)
 		{
 			if(!endsWith(s, ".json")) continue;
-			ssvuj::Obj root{readFromFile(s)};
+			ssvuj::Obj eRoot{readFromFile(s)};
 
-			if(!has(root, "Entries")) appendEntry(root);
-			else for(const auto& v : root["Entries"]) appendEntry(v);
+			if(!has(eRoot, "Entries")) appendEntry(eRoot);
+			else for(const auto& v : eRoot["Entries"]) appendEntry(v);
 		}
 		for(const auto& s : asidePaths) main.addAside(readFromFile(s));
 	}
