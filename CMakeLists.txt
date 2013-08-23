@@ -29,6 +29,5 @@ include_directories(${SSVUTILSJSON_INCLUDE_DIR})
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_link_libraries(${PROJECT_NAME} ${LIB_MARKDOWN})
 target_link_libraries(${PROJECT_NAME} ${SSVJSONCPP_LIBRARY})
-target_link_libraries(${PROJECT_NAME} ${SSVUTILS_LIBRARY})
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/_RELEASE/)
