@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "ludum dare 27 - 10corp",
+				"Markdown": "mdEntries/2.md",
+				"Date": "26 august 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "cppdiscount",
 				"Markdown": "mdEntries/1.md",
 				"Date": "09 august 2013"
