@@ -1,0 +1,10 @@
+{
+	"Template": "Templates/Entries/header.tpl",
+
+	"ToExpand":
+	{
+		"Title": "unime",
+		"Text": "Stuff about UNIME. [Informatica 2013-2014]
+				<hr>"
+	}
+}

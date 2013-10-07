@@ -1,0 +1,15 @@
+{
+	"Entries":
+	[
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "link",
+				"Markdown": "mdEntries/0.md",
+				"Date": "07 october 2013"
+			}
+		}
+	]
+}

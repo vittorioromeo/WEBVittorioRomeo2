@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "operation bloodshed",
+				"Markdown": "mdEntries/3.md",
+				"Date": "7 october 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "ludum dare 27 - 10corp",
 				"Markdown": "mdEntries/2.md",
 				"Date": "26 august 2013"
