@@ -13,8 +13,7 @@
 						You control a triangle that rotates around the center of the screen.<br>
 						Your goal is to stay alive as long as possible by avoiding the walls that go towards the center.<br>
 						Features JSON and LUA scripting for complete customization and level sharing.</p>
-						<p>Since 1.8, you can now compete online for the top high scores!</p>
-						<p>Updating from 1.91 with the auto updater? Delete 'config.json' from your folder first!</p>"
+						<p>Compete online for the top high scores!</p>"
 			}
 		},
 		{
@@ -26,8 +25,7 @@
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },
 				{ "Title": "fb", 					"Link": "http://www.facebook.com/OpenHexagon\" target=\"_blank\"" },
 				{ "Title": "packs", 				"Link": "/Downloads/OpenHexagon/LevelPacks\" target=\"_blank\"" },
-				{ "Title": "github", 				"Link": "https://github.com/SuperV1234/SSVOpenHexagon\" target=\"_blank\"" },
-				{ "Title": "old", 					"Link": "/Downloads/OpenHexagon\" target=\"_blank\"" }
+				{ "Title": "github", 				"Link": "https://github.com/SuperV1234/SSVOpenHexagon\" target=\"_blank\"" }
 			]
 		}
 	]
