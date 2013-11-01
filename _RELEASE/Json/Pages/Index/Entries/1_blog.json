@@ -6,6 +6,17 @@
 
 			"ToExpand":
 			{
+				"Title": "testing new host",
+				"Text": "<p>TESTING.</p>
+						<hr>",
+				"Date": "01 november 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "operation bloodshed",
 				"Markdown": "mdEntries/3.md",
 				"Date": "7 october 2013"
