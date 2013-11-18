@@ -10,8 +10,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <SSVUtils/SSVUtils.h>
-#include <SSVUtilsJson/SSVUtilsJson.h>
+#include <SSVUtils/SSVUtils.hpp>
+#include <SSVUtilsJson/SSVUtilsJson.hpp>
 #include <DiscountCpp/DiscountCpp.h>
 
 using namespace std;
