@@ -1,0 +1,21 @@
+{
+	"Entries":
+	[
+		{
+			"Template": "Templates/Entries/text.tpl",
+
+			"ToExpand":
+			{
+				"Title": "Dive into C++11 - [1] - Arkanoid clone in 160~ lines of code (SFML 2.1)",
+				"Text": "<img src=\"{{ResourcesPath}}/img/Tutorials/Banners/dicpp1.png\">
+						<p>Let's build an Arkanoid clone from scratch in 40 minutes, using C++11 and SFML 2.1!</p>"
+			}
+		},
+		{
+			"MenuItems":
+			[
+				{ "Title": "watch (youtube)", "Link": "http://youtu.be/_4K3tsKa1Uc\" target=\"_blank\"" }
+			]
+		}
+	]
+}
