@@ -60,7 +60,6 @@ struct Main
 			ssvuj::set(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
-
 		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
 	}
 
@@ -157,7 +156,7 @@ void expandPages()
 
 		lo("expandPages") << "> " << resultPath << endl;
 		ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
-		lo << endl;
+		lo() << endl;
 
 		ifstream inFile(resultPath + "temp");
 		ofstream outFile(resultPath);
@@ -170,4 +169,4 @@ void expandPages()
 	}
 }
 
-int main() { loadPages(); expandPages(); return 0; }
+int main() { SSVU_TEST_RUN_ALL(); loadPages(); expandPages(); return 0; }
