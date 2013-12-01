@@ -6,15 +6,16 @@
 
 			"ToExpand":
 			{
-				"Title": "Dive into C++11 - [1] - Arkanoid clone in 160~ lines of code (SFML 2.1)",
+				"Title": "Dive into C++11: game-development tutorials with C++11",
 				"Text": "<img src=\"{{ResourcesPath}}/img/Tutorials/Banners/dicpp1.png\">
-						<p>Let's build an Arkanoid clone from scratch in 40 minutes, using C++11 and SFML 2.1!</p>"
+						<p>Let's build an Arkanoid clone from scratch, using C++11 and SFML 2.1!</p>
+						<p>We will also learn a lot about the new C++11 standard and its powerful features.</p>"
 			}
 		},
 		{
 			"MenuItems":
 			[
-				{ "Title": "watch (youtube)", "Link": "http://www.youtube.com/watch?v=_4K3tsKa1Uc\" target=\"_blank\"" }
+				{ "Title": "playlist", "Link": "http://www.youtube.com/playlist?list=PLTEcWGdSiQenl4YRPvSqW7UPC6SiGNN7e\" target=\"_blank\"" }
 			]
 		}
 	]

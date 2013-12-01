@@ -6,6 +6,19 @@
 
 			"ToExpand":
 			{
+				"Title": "new tutorial - dive into C++11 [2]",
+				"Text": "<p>Let's expand our Arkanoid clone and our C++11 knowledge.</p>
+						<p>Learn more about `constexpr` and uniform initialization, and how to deal with FPS and framerates.</p>
+						<p>Watch on the TUTORIALS page.</p>
+						<hr>",
+				"Date": "1 december 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "new tutorial - dive into C++11 [1]",
 				"Text": "<p>Let's build an Arkanoid clone from scratch in 40 minutes, using C++11 and SFML 2.1!</p>
 						<p>Watch on the TUTORIALS page.</p>
