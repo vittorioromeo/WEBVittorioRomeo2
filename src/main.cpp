@@ -32,7 +32,7 @@ Path getResourcesFolderPath(int mDepth)
 Dictionary getDictionaryFromJson(const ssvuj::Obj& mValue)
 {
 	Dictionary result;
-	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[as<string>(itr.key())] = as<string>(*itr);
+	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[getAs<string>(itr.key())] = getAs<string>(*itr);
 	return result;
 }
 
@@ -56,15 +56,15 @@ struct Main
 	{
 		if(ssvuj::has(mRoot, "Markdown"))
 		{
-			Path mdPath{mPagePath.getParent() + "Entries/" + ssvuj::as<string>(mRoot, "Markdown")};
+			Path mdPath{mPagePath.getParent() + "Entries/" + ssvuj::getAs<string>(mRoot, "Markdown")};
 			ssvuj::set(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
 		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
 	}
 
-	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
-	void addAside(const ssvuj::Obj& mRoot) { expandItem(as<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
+	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(getAs<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
+	void addAside(const ssvuj::Obj& mRoot) { expandItem(getAs<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
 	void addMenu(const ssvuj::Obj& mRoot)
 	{
 		Dictionary dict;
@@ -109,7 +109,7 @@ struct Page
 
 	void appendEntry(const ssvuj::Obj& mRoot) { if(has(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
 
-	Path getResultPath() const { return "Result/" + as<string>(root, "fileName"); }
+	Path getResultPath() const { return "Result/" + getAs<string>(root, "fileName"); }
 
 	string getOutput() const
 	{
