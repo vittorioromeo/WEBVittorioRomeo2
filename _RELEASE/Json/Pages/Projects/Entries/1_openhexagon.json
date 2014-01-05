@@ -13,12 +13,16 @@
 						You control a triangle that rotates around the center of the screen.<br>
 						Your goal is to stay alive as long as possible by avoiding the walls that go towards the center.<br>
 						Features JSON and LUA scripting for complete customization and level sharing.</p>
-						<p>Compete online for the top high scores!</p>"
+						<p>Compete online for the top high scores!</p>
+						<p>If you're having trouble extracting the archive for the GNU/Linux 2.0-RC1 version, rename the file
+						extension to `.tar.xz`.</p>"
 			}
 		},
-		{
+		{ 
 			"MenuItems":
 			[
+				{ "Title": "2.0-RC1(win)", 			"Link": "/Misc/Temp/OpenHexagonV2.0RC1.zip" },
+				{ "Title": "2.0-RC1(linux)", 		"Link": "/Misc/Temp/OpenHexagon2.0-RC1.xz" },
 				{ "Title": "1.92(win)", 			"Link": "/Downloads/OpenHexagon/OpenHexagonV1.92.7z" },
 				{ "Title": "1.92(linux)",			"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.92.tar.gz" },
 				{ "Title": "readme", 				"Link": "/Downloads/OpenHexagon/README.html\" target=\"_blank\"" },

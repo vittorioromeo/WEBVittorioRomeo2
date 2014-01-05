@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "dive into C++11 - episodes 3, 4",
+				"Markdown": "mdEntries/4.md",
+				"Date": "5 january 2013"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "new tutorial - dive into C++11 [2]",
 				"Text": "<p>Let's expand our Arkanoid clone and our C++11 knowledge.</p>
 						<p>Learn more about `constexpr` and uniform initialization, and how to deal with FPS and framerates.</p>
