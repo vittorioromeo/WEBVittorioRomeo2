@@ -59,7 +59,7 @@ struct Main
 			ssvuj::arch(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
-		mTarget.push_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
+		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
 	}
 
 	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(ssvuj::getExtr<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
@@ -68,7 +68,7 @@ struct Main
 	{
 		Dictionary dict;
 		for(const auto& i : mRoot["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
-		expandedEntries.push_back(dict.getExpanded(getFileContents("Templates/Entries/menu.tpl")));
+		expandedEntries.emplace_back(dict.getExpanded(getFileContents("Templates/Entries/menu.tpl")));
 	}
 
 	string getOutput() const
