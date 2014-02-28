@@ -168,4 +168,4 @@ void expandPages()
 	}
 }
 
-int main() { SSVU_TEST_RUN_ALL(); loadPages(); expandPages(); return 0; }
+int main() { SSVUT_RUN(); loadPages(); expandPages(); return 0; }
