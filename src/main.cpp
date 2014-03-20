@@ -19,12 +19,12 @@ using namespace ssvu;
 using namespace ssvu::FileSystem;
 using namespace ssvu::TemplateSystem;
 
-int getDepth(const ssvufs::Path& mPath) { return getCharCount(mPath, '/'); }
+std::size_t getDepth(const ssvufs::Path& mPath) { return getCharCount(mPath, '/'); }
 
-ssvufs::Path getResourcesFolderPath(int mDepth)
+ssvufs::Path getResourcesFolderPath(std::size_t mDepth)
 {
 	std::string result;
-	for(int i{0}; i < mDepth; ++i) result += "../";
+	for(auto i(0u); i < mDepth; ++i) result += "../";
 	return result + "Resources";
 }
 
