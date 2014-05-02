@@ -93,7 +93,10 @@ struct Page
 		Path pageFolder{myPath.getParent()};
 		Path entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
 
-		vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)}, asidePaths{getScan<Mode::Recurse, Type::File>(asidesFolder)};
+		vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)};
+
+		vector<Path> asidePaths;
+		if(asidesFolder.existsAsFolder()) asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
 
 		for(const auto& s : entryPaths)
 		{
