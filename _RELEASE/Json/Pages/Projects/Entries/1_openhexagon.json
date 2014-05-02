@@ -21,7 +21,7 @@
 		{ 
 			"MenuItems":
 			[
-				{ "Title": "2.0-RC1(win)", 			"Link": "/Misc/Temp/OpenHexagonV2.0RC1.zip" },
+				{ "Title": "2.0-RC2(win)", 			"Link": "/Misc/Temp/OpenHexagonV2.0-RC2-Win32.zip" },
 				{ "Title": "2.0-RC1(linux)", 		"Link": "/Misc/Temp/OpenHexagon2.0-RC1.xz" },
 				{ "Title": "1.92(win)", 			"Link": "/Downloads/OpenHexagon/OpenHexagonV1.92.7z" },
 				{ "Title": "1.92(linux)",			"Link": "/Downloads/OpenHexagon/Linux/OpenHexagonV1.92.tar.gz" },

@@ -6,9 +6,21 @@
 
 			"ToExpand":
 			{
+				"Title": "open hexagon 2.0 RC2 released",
+				"Text": "<p>Get it on the projects page!</p>
+						<p>Please report issues and give your feedback on the official Facebook page.</p>
+						<hr>",
+				"Date": "2 may 2014"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "dive into C++11 - episodes 3, 4",
 				"Markdown": "mdEntries/4.md",
-				"Date": "5 january 2013"
+				"Date": "5 january 2014"
 			}
 		},
 		{
