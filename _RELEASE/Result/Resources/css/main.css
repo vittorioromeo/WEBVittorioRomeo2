@@ -30,6 +30,11 @@ code {
   font-size: 11px;
 }
 
+.center-ad {
+    text-align: center;
+float: center;
+}
+
 .wrapper {
   width: 90%;
   margin: 0 5%; }

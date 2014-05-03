@@ -1,13 +1,16 @@
 <article>
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- BannerLboard -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-2318296776122737"
-     data-ad-slot="7080234403"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
+<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-2318296776122737";
+	/* MainBanner */
+	google_ad_slot = "6978227206";
+	google_ad_width = 468;
+	google_ad_height = 60;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
 
     {{#Entries}}
         {{Entry}}     
