@@ -32,7 +32,8 @@ code {
 
 .center-ad {
     text-align: center;
-float: center;
+  float: center;
+  overflow-x: hidden;
 }
 
 .wrapper {
