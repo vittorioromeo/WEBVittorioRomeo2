@@ -2,14 +2,6 @@
 // License: Academic Free License ("AFL") v. 3.0
 // AFL License page: http://opensource.org/licenses/AFL-3.0
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <string>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <vector>
 #include <SSVUtils/SSVUtils.hpp>
 #include <SSVUtilsJson/SSVUtilsJson.hpp>
 #include <DiscountCpp/DiscountCpp.hpp>
