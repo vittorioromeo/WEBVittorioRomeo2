@@ -33,7 +33,7 @@ struct MainMenu
 	{
 		Dictionary dict;
 		for(const auto& i : root["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
-		return dict.getExpanded(getFileContents("Templates/Base/mainMenu.tpl"));
+		return dict.getExpanded(ssvufs::Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString());
 	}
 };
 
@@ -49,7 +49,7 @@ struct Main
 			ssvuj::arch(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
-		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
+		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(mTplPath.getContentsAsString()));
 	}
 
 	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(ssvuj::getExtr<std::string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
@@ -58,7 +58,7 @@ struct Main
 	{
 		Dictionary dict;
 		for(const auto& i : mRoot["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
-		expandedEntries.emplace_back(dict.getExpanded(getFileContents("Templates/Entries/menu.tpl")));
+		expandedEntries.emplace_back(dict.getExpanded(ssvufs::Path{"Templates/Entries/menu.tpl"}.getContentsAsString()));
 	}
 
 	auto getOutput() const
@@ -66,7 +66,7 @@ struct Main
 		Dictionary dict;
 		for(const auto& e : expandedEntries) dict += {"Entries", {{"Entry", e}}};
 		for(const auto& a : expandedAsides) dict += {"Asides", {{"Aside", a}}};
-		return dict.getExpanded(getFileContents("Templates/Base/main.tpl"));
+		return dict.getExpanded(ssvufs::Path{"Templates/Base/main.tpl"}.getContentsAsString());
 	}
 };
 
@@ -86,7 +86,7 @@ struct Page
 		std::vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)};
 
 		std::vector<Path> asidePaths;
-		if(asidesFolder.existsAsFolder()) asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
+		if(asidesFolder.exists<ssvufs::Type::Folder>()) asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
 
 		for(const auto& s : entryPaths)
 		{
@@ -111,7 +111,7 @@ struct Page
 		dict["MainMenu"] = mainMenu.getOutput();
 		dict["Main"] = main.getOutput();
 		dict["ResourcesPath"] = resourcesPath;
-		return dict.getExpanded(getFileContents("Templates/page.tpl"));
+		return dict.getExpanded(ssvufs::Path{"Templates/page.tpl"}.getContentsAsString());
 	}
 };
 
