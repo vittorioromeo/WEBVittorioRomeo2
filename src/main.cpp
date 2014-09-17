@@ -6,24 +6,22 @@
 #include <SSVUtilsJson/SSVUtilsJson.hpp>
 #include <DiscountCpp/DiscountCpp.hpp>
 
-using namespace std;
-using namespace ssvu;
 using namespace ssvu::FileSystem;
 using namespace ssvu::TemplateSystem;
 
-std::size_t getDepth(const ssvufs::Path& mPath) { return getCharCount(mPath, '/'); }
+auto getDepth(const ssvufs::Path& mPath) { return ssvu::getCharCount(mPath, '/'); }
 
-ssvufs::Path getResourcesFolderPath(std::size_t mDepth)
+auto getResourcesFolderPath(std::size_t mDepth)
 {
-	std::string result;
+	ssvufs::Path result;
 	for(auto i(0u); i < mDepth; ++i) result += "../";
 	return result + "Resources";
 }
 
-Dictionary getDictionaryFromJson(const ssvuj::Obj& mValue)
+auto getDictionaryFromJson(const ssvuj::Obj& mValue)
 {
 	Dictionary result;
-	for(auto itr(begin(mValue)); itr != end(mValue); ++itr) result[ssvuj::getExtr<string>(itr.key())] = ssvuj::getExtr<string>(*itr);
+	for(auto itr(std::begin(mValue)); itr != std::end(mValue); ++itr) result[ssvuj::getExtr<std::string>(itr.key())] = ssvuj::getExtr<std::string>(*itr);
 	return result;
 }
 
@@ -31,7 +29,7 @@ struct MainMenu
 {
 	ssvuj::Obj root;
 
-	string getOutput() const
+	auto getOutput() const
 	{
 		Dictionary dict;
 		for(const auto& i : root["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
@@ -41,21 +39,21 @@ struct MainMenu
 
 struct Main
 {
-	vector<string> expandedEntries{""}, expandedAsides{""};
+	std::vector<std::string> expandedEntries{""}, expandedAsides{""};
 
-	void expandItem(const Path& mTplPath, ssvuj::Obj mRoot, vector<string>& mTarget, const Path& mPagePath = "")
+	void expandItem(const Path& mTplPath, ssvuj::Obj mRoot, std::vector<std::string>& mTarget, const Path& mPagePath = "")
 	{
 		if(ssvuj::hasObj(mRoot, "Markdown"))
 		{
-			Path mdPath{mPagePath.getParent() + "Entries/" + ssvuj::getExtr<string>(mRoot, "Markdown")};
+			Path mdPath{mPagePath.getParent() + "Entries/" + ssvuj::getExtr<std::string>(mRoot, "Markdown")};
 			ssvuj::arch(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
 		}
 
 		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(getFileContents(mTplPath)));
 	}
 
-	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(ssvuj::getExtr<string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
-	void addAside(const ssvuj::Obj& mRoot) { expandItem(ssvuj::getExtr<string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
+	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(ssvuj::getExtr<std::string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
+	void addAside(const ssvuj::Obj& mRoot) { expandItem(ssvuj::getExtr<std::string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
 	void addMenu(const ssvuj::Obj& mRoot)
 	{
 		Dictionary dict;
@@ -63,7 +61,7 @@ struct Main
 		expandedEntries.emplace_back(dict.getExpanded(getFileContents("Templates/Entries/menu.tpl")));
 	}
 
-	string getOutput() const
+	auto getOutput() const
 	{
 		Dictionary dict;
 		for(const auto& e : expandedEntries) dict += {"Entries", {{"Entry", e}}};
@@ -85,14 +83,14 @@ struct Page
 		Path pageFolder{myPath.getParent()};
 		Path entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
 
-		vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)};
+		std::vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)};
 
-		vector<Path> asidePaths;
+		std::vector<Path> asidePaths;
 		if(asidesFolder.existsAsFolder()) asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
 
 		for(const auto& s : entryPaths)
 		{
-			if(!endsWith(s, ".json")) continue;
+			if(!ssvu::endsWith(s, ".json")) continue;
 			ssvuj::Obj eRoot{ssvuj::getFromFile(s)};
 
 			if(!ssvuj::hasObj(eRoot, "Entries")) appendEntry(eRoot);
@@ -103,9 +101,9 @@ struct Page
 
 	void appendEntry(const ssvuj::Obj& mRoot) { if(ssvuj::hasObj(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
 
-	Path getResultPath() const { return "Result/" + ssvuj::getExtr<string>(root, "fileName"); }
+	auto getResultPath() const { return Path{"Result/" + ssvuj::getExtr<std::string>(root, "fileName")}; }
 
-	string getOutput() const
+	auto getOutput() const
 	{
 		Path resourcesPath{getResourcesFolderPath(getDepth(getResultPath()) - 1)};
 
@@ -118,49 +116,55 @@ struct Page
 };
 
 // ---
-vector<Page> pages;
+std::vector<Page> pages;
 
 void loadPages()
 {
-	lo("loadPages") << "Getting all page.json files" << endl;
+	ssvu::lo("loadPages") << "Getting all page.json files\n";
 
 	Path pagesPath("Json/Pages/");
-	vector<Path> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
+	std::vector<Path> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
 
 	for(const auto& s : pageJsonPaths)
 	{
-		lo("loadPages") << "> " << s << endl;
+		ssvu::lo("loadPages") << "> " << s << "\n";
 		pages.emplace_back(s, ssvuj::getFromFile(s));
 	}
 }
 
 void expandPages()
 {
-	lo("expandPages") << "Writing pages to result" << endl;
+	ssvu::lo("expandPages") << "Writing pages to result\n";
 
 	for(auto& p : pages)
 	{
 		// Check path
 		Path parentPath{p.getResultPath().getParent()};
-		lo("expandPages") << "Checking if path exists: " << parentPath << endl;
+		ssvu::lo("expandPages") << "Checking if path exists: " << parentPath << "\n";
 		if(!exists(parentPath)) createFolder(parentPath);
 
 		// Write page to file
 		Path resultPath{p.getResultPath()};
 
-		lo("expandPages") << "> " << resultPath << endl;
-		ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
-		lo() << endl;
+		ssvu::lo("expandPages") << "> " << resultPath << "\n";
+		std::ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
+		ssvu::lo() << "\n";
 
-		ifstream inFile(resultPath + "temp");
-		ofstream outFile(resultPath);
+		std::ifstream inFile(resultPath + "temp");
+		std::ofstream outFile(resultPath);
 
-		string line;
-		while(getline(inFile, line)) if(!line.empty()) outFile << line << "\n";
+		std::string line;
+		while(std::getline(inFile, line)) if(!line.empty()) outFile << line << "\n";
 
 		inFile.close(); outFile.flush(); outFile.close();
 		removeFile(p.getResultPath() + "temp");
 	}
 }
 
-int main() { SSVUT_RUN(); loadPages(); expandPages(); return 0; }
+int main()
+{
+	SSVUT_RUN();
+	loadPages(); ssvu::lo().flush();
+	expandPages(); ssvu::lo().flush();
+	return 0;
+}
