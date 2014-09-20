@@ -141,7 +141,7 @@ void expandPages()
 		// Check path
 		Path parentPath{p.getResultPath().getParent()};
 		ssvu::lo("expandPages") << "Checking if path exists: " << parentPath << "\n";
-		if(!exists(parentPath)) createFolder(parentPath);
+		if(!parentPath.exists<ssvufs::Type::Folder>()) createFolder(parentPath);
 
 		// Write page to file
 		Path resultPath{p.getResultPath()};
