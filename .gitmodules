@@ -7,3 +7,6 @@
 [submodule "extlibs/DiscountCpp"]
 	path = extlibs/DiscountCpp
 	url = https://github.com/SuperV1234/DiscountCpp.git
+[submodule "extlibs/SSVCMake"]
+	path = extlibs/SSVCMake
+	url = https://github.com/SuperV1234/SSVCMake.git
