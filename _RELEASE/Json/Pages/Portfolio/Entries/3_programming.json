@@ -4,8 +4,8 @@
 	"ToExpand":
 	{
 		"Title": "programming",
-		"Text": "<p>4+ years of experience with C# and .NET Framework.
-				2+ years of experience with C++11/C++14 and the Standard Library.
+		"Text": "<p>4+ years of experience with C# and .NET Framework.<br>
+				2+ years of experience with C++11/C++14 and the Standard Library.<br>
 				1+ years of experience with HTML, CSS and Javascript.<br>
 				<br>
 				4+ years of experience with 2D game development.<br>
@@ -19,8 +19,8 @@
 				Ability to refactor, organize and optimize existing code.<br>
 				Knowledge of common game development algorithms and techniques.<br>
 				<br>
-				Experience with GNU/Linux and Microsoft Windows as development environments.
-				Experience with Visual Studio, Eclipse, Code::Blocks, CodeLite, QT Creator, Sublime Text.
+				Experience with GNU/Linux and Microsoft Windows as development environments.<br>
+				Experience with Visual Studio, Eclipse, Code::Blocks, CodeLite, QT Creator, Sublime Text.<br>
 				Experience with MinGW, GCC, Clang and Boost.<br></p>
 				<hr>"
 	}

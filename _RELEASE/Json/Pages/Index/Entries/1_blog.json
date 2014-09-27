@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "post-summer update",
+				"Markdown": "mdEntries/5.md",
+				"Date": "27 september 2014"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "open hexagon 2.0 RC2 released",
 				"Text": "<p>Get it on the projects page!</p>
 						<p>Please report issues and give your feedback on the official Facebook page.</p>
