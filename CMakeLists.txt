@@ -6,7 +6,6 @@ include(SSVCMake)
 
 SSVCMake_setDefaults()
 SSVCMake_findExtlib(SSVUtils)
-SSVCMake_findExtlib(SSVUtilsJson)
 find_library(LIB_MARKDOWN markdown)
 find_path(INC_MARKDOWN mkdio.h)
 

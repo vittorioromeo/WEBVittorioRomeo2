@@ -2,38 +2,43 @@
 // License: Academic Free License ("AFL") v. 3.0
 // AFL License page: http://opensource.org/licenses/AFL-3.0
 
-#include <SSVUtils/SSVUtils.hpp>
-#include <SSVUtilsJson/SSVUtilsJson.hpp>
+#include <SSVUtils/Core/Core.hpp>
+#include <SSVUtils/Json/Json.hpp>
+#include <SSVUtils/TemplateSystem/TemplateSystem.hpp>
+#include <SSVUtils/Test/Test.hpp>
 #include <DiscountCpp/DiscountCpp.hpp>
 
 using namespace ssvu::FileSystem;
 using namespace ssvu::TemplateSystem;
+using namespace ssvu::Json;
 
-auto getDepth(const ssvufs::Path& mPath) { return ssvu::getCharCount(mPath, '/'); }
+auto getDepth(const Path& mPath) { return ssvu::getCharCount(mPath, '/'); }
 
 auto getResourcesFolderPath(std::size_t mDepth)
 {
-	ssvufs::Path result;
+	Path result;
 	for(auto i(0u); i < mDepth; ++i) result += "../";
 	return result + "Resources";
 }
 
-auto getDictionaryFromJson(const ssvuj::Obj& mValue)
+auto getDictionaryFromJson(const Val& mVal)
 {
 	Dictionary result;
-	for(auto itr(std::begin(mValue)); itr != std::end(mValue); ++itr) result[ssvuj::getExtr<std::string>(itr.key())] = ssvuj::getExtr<std::string>(*itr);
+	mVal.forObjAs<Str>([&result](const auto& mKey, const auto& mVal){ result[mKey] = mVal; });
+	// TODO ?: for(const auto& p : mVal.forObjAs<std::string>()) result[p.key] = p.value;
 	return result;
 }
 
 struct MainMenu
 {
-	ssvuj::Obj root;
+	Val root;
 
 	auto getOutput() const
 	{
 		Dictionary dict;
-		for(const auto& i : root["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
-		return dict.getExpanded(ssvufs::Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString());
+		root["MenuItems"].forArr([&dict](const auto& mVal){ dict += {"MenuItems", getDictionaryFromJson(mVal)}; });
+		// TODO ?: for(const auto& i : root["MenuItems"].forArr()) dict += {"MenuItems", getDictionaryFromJson(i)};
+		return dict.getExpanded(Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString());
 	}
 };
 
@@ -41,24 +46,30 @@ struct Main
 {
 	std::vector<std::string> expandedEntries{""}, expandedAsides{""};
 
-	void expandItem(const Path& mTplPath, ssvuj::Obj mRoot, std::vector<std::string>& mTarget, const Path& mPagePath = "")
+	void expandItem(const Path& mTplPath, Val mRoot, std::vector<std::string>& mTarget, const Path& mPagePath = "")
 	{
-		if(ssvuj::hasObj(mRoot, "Markdown"))
+		if(mRoot.has("Markdown"))
 		{
-			Path mdPath{mPagePath.getParent() + "Entries/" + ssvuj::getExtr<std::string>(mRoot, "Markdown")};
-			ssvuj::arch(mRoot, "Text", discountcpp::getHTMLFromMarkdownFile(mdPath));
+			Path mdPath{mPagePath.getParent() + "Entries/" + mRoot["Markdown"].as<Str>()};
+			mRoot["Text"] = discountcpp::getHTMLFromMarkdownFile(mdPath);
 		}
 
 		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(mTplPath.getContentsAsString()));
 	}
 
-	void addEntry(const ssvuj::Obj& mRoot, const Path& mPagePath) { expandItem(ssvuj::getExtr<std::string>(mRoot, "Template"), mRoot["ToExpand"], expandedEntries, mPagePath); }
-	void addAside(const ssvuj::Obj& mRoot) { expandItem(ssvuj::getExtr<std::string>(mRoot, "Template"), mRoot["ToExpand"], expandedAsides); }
-	void addMenu(const ssvuj::Obj& mRoot)
+	void addEntry(const Val& mRoot, const Path& mPagePath)
+	{
+		expandItem(mRoot["Template"].as<Str>(), mRoot["ToExpand"], expandedEntries, mPagePath);
+	}
+	void addAside(const Val& mRoot)
+	{
+		expandItem(mRoot["Template"].as<Str>(), mRoot["ToExpand"], expandedAsides);
+	}
+	void addMenu(const Val& mRoot)
 	{
 		Dictionary dict;
-		for(const auto& i : mRoot["MenuItems"]) dict += {"MenuItems", getDictionaryFromJson(i)};
-		expandedEntries.emplace_back(dict.getExpanded(ssvufs::Path{"Templates/Entries/menu.tpl"}.getContentsAsString()));
+		mRoot["MenuItems"].forArr([&dict](const auto& mVal){ dict += {"MenuItems", getDictionaryFromJson(mVal)}; });
+		expandedEntries.emplace_back(dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsString()));
 	}
 
 	auto getOutput() const
@@ -66,19 +77,19 @@ struct Main
 		Dictionary dict;
 		for(const auto& e : expandedEntries) dict += {"Entries", {{"Entry", e}}};
 		for(const auto& a : expandedAsides) dict += {"Asides", {{"Aside", a}}};
-		return dict.getExpanded(ssvufs::Path{"Templates/Base/main.tpl"}.getContentsAsString());
+		return dict.getExpanded(Path{"Templates/Base/main.tpl"}.getContentsAsString());
 	}
 };
 
 struct Page
 {
 	Path myPath;
-	ssvuj::Obj root;
+	Val root;
 
-	MainMenu mainMenu{ssvuj::getFromFile("Json/mainMenu.json")};
+	MainMenu mainMenu{Val::fromFile("Json/mainMenu.json")};
 	Main main;
 
-	Page(const Path& mPath, const ssvuj::Obj& mRoot) : myPath{mPath}, root{mRoot}
+	Page(const Path& mPath, const Val& mRoot) : myPath{mPath}, root{mRoot}
 	{
 		Path pageFolder{myPath.getParent()};
 		Path entriesFolder{pageFolder + "Entries/"}, asidesFolder{pageFolder + "Asides/"};
@@ -86,22 +97,22 @@ struct Page
 		std::vector<Path> entryPaths{getScan<Mode::Recurse, Type::File>(entriesFolder)};
 
 		std::vector<Path> asidePaths;
-		if(asidesFolder.exists<ssvufs::Type::Folder>()) asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
+		if(asidesFolder.exists<Type::Folder>()) asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
 
 		for(const auto& s : entryPaths)
 		{
 			if(!ssvu::endsWith(s, ".json")) continue;
-			ssvuj::Obj eRoot{ssvuj::getFromFile(s)};
+			auto eRoot(Val::fromFile(s));
 
-			if(!ssvuj::hasObj(eRoot, "Entries")) appendEntry(eRoot);
-			else for(const auto& v : eRoot["Entries"]) appendEntry(v);
+			if(!eRoot.has("Entries")) appendEntry(eRoot);
+			else eRoot["Entries"].forArr([this](const auto& mEntry){ this->appendEntry(mEntry); });
 		}
-		for(const auto& s : asidePaths) main.addAside(ssvuj::getFromFile(s));
+		for(const auto& s : asidePaths) main.addAside(Val::fromFile(s));
 	}
 
-	void appendEntry(const ssvuj::Obj& mRoot) { if(ssvuj::hasObj(mRoot, "MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
+	void appendEntry(const Val& mRoot) { if(mRoot.has("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
 
-	auto getResultPath() const { return Path{"Result/" + ssvuj::getExtr<std::string>(root, "fileName")}; }
+	auto getResultPath() const { return Path{"Result/" + root["fileName"].as<Str>()}; }
 
 	auto getOutput() const
 	{
@@ -111,7 +122,7 @@ struct Page
 		dict["MainMenu"] = mainMenu.getOutput();
 		dict["Main"] = main.getOutput();
 		dict["ResourcesPath"] = resourcesPath;
-		return dict.getExpanded(ssvufs::Path{"Templates/page.tpl"}.getContentsAsString());
+		return dict.getExpanded(Path{"Templates/page.tpl"}.getContentsAsString());
 	}
 };
 
@@ -128,7 +139,7 @@ void loadPages()
 	for(const auto& s : pageJsonPaths)
 	{
 		ssvu::lo("loadPages") << "> " << s << "\n";
-		pages.emplace_back(s, ssvuj::getFromFile(s));
+		pages.emplace_back(s, Val::fromFile(s));
 	}
 }
 
@@ -141,7 +152,7 @@ void expandPages()
 		// Check path
 		Path parentPath{p.getResultPath().getParent()};
 		ssvu::lo("expandPages") << "Checking if path exists: " << parentPath << "\n";
-		if(!parentPath.exists<ssvufs::Type::Folder>()) createFolder(parentPath);
+		if(!parentPath.exists<Type::Folder>()) createFolder(parentPath);
 
 		// Write page to file
 		Path resultPath{p.getResultPath()};
