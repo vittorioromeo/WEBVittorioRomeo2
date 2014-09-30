@@ -2,11 +2,12 @@
 // License: Academic Free License ("AFL") v. 3.0
 // AFL License page: http://opensource.org/licenses/AFL-3.0
 
-#include <SSVUtils/Core/Core.hpp>
+/*#include <SSVUtils/Core/Core.hpp>
 #include <SSVUtils/Json/Json.hpp>
 #include <SSVUtils/TemplateSystem/TemplateSystem.hpp>
 #include <SSVUtils/Test/Test.hpp>
-#include <SSVUtils/Tests/TestsJson.hpp>
+#include <SSVUtils/Tests/TestsJson.hpp>*/
+#include <SSVUtils/SSVUtils.hpp>
 #include <DiscountCpp/DiscountCpp.hpp>
 
 using namespace ssvu::FileSystem;
