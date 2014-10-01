@@ -26,8 +26,8 @@ auto getResourcesFolderPath(std::size_t mDepth)
 auto getDictionaryFromJson(const Val& mVal)
 {
 	Dictionary result;
-	mVal.forObjAs<Str>([&result](const auto& mKey, const auto& mVal){ result[mKey] = mVal; });
-	// TODO ?: for(const auto& p : mVal.forObjAs<std::string>()) result[p.key] = p.value;
+	//mVal.forObjAs<Str>([&result](const auto& mKey, const auto& mVal){ result[mKey] = mVal; });
+	for(const auto& p : mVal.forObjAs<std::string>()) result[p.key] = p.value;
 	return result;
 }
 
@@ -38,8 +38,7 @@ struct MainMenu
 	auto getOutput() const
 	{
 		Dictionary dict;
-		root["MenuItems"].forArr([&dict](const auto& mVal){ dict += {"MenuItems", getDictionaryFromJson(mVal)}; });
-		// TODO ?: for(const auto& i : root["MenuItems"].forArr()) dict += {"MenuItems", getDictionaryFromJson(i)};
+		for(const auto& i : root["MenuItems"].as<Arr>()) dict += {"MenuItems", getDictionaryFromJson(i)};
 		return dict.getExpanded(Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString());
 	}
 };
@@ -70,7 +69,8 @@ struct Main
 	void addMenu(const Val& mRoot)
 	{
 		Dictionary dict;
-		mRoot["MenuItems"].forArr([&dict](const auto& mVal){ dict += {"MenuItems", getDictionaryFromJson(mVal)}; });
+		//mRoot["MenuItems"].forArr([&dict](const auto& mVal){ dict += {"MenuItems", getDictionaryFromJson(mVal)}; });
+		for(const auto& v : mRoot["MenuItems"].forArr()) dict += {"MenuItems", getDictionaryFromJson(v)};
 		expandedEntries.emplace_back(dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsString()));
 	}
 
@@ -107,7 +107,7 @@ struct Page
 			auto eRoot(Val::fromFile(s));
 
 			if(!eRoot.has("Entries")) appendEntry(eRoot);
-			else eRoot["Entries"].forArr([this](const auto& mEntry){ this->appendEntry(mEntry); });
+			else for(const auto& e : eRoot["Entries"].forArr()) appendEntry(e);
 		}
 		for(const auto& s : asidePaths) main.addAside(Val::fromFile(s));
 	}
