@@ -26,7 +26,6 @@ auto getResourcesFolderPath(std::size_t mDepth)
 auto getDictionaryFromJson(const Val& mVal)
 {
 	Dictionary result;
-	//mVal.forObjAs<Str>([&result](const auto& mKey, const auto& mVal){ result[mKey] = mVal; });
 	for(const auto& p : mVal.forObjAs<std::string>()) result[p.key] = p.value;
 	return result;
 }
@@ -69,7 +68,6 @@ struct Main
 	void addMenu(const Val& mRoot)
 	{
 		Dictionary dict;
-		//mRoot["MenuItems"].forArr([&dict](const auto& mVal){ dict += {"MenuItems", getDictionaryFromJson(mVal)}; });
 		for(const auto& v : mRoot["MenuItems"].forArr()) dict += {"MenuItems", getDictionaryFromJson(v)};
 		expandedEntries.emplace_back(dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsString()));
 	}
@@ -177,7 +175,8 @@ void expandPages()
 int main()
 {
 	SSVUT_RUN();
-	loadPages(); ssvu::lo().flush();
-	expandPages(); ssvu::lo().flush();
+	loadPages();
+	expandPages();
+	ssvu::lo().flush();
 	return 0;
 }
