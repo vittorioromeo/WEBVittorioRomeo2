@@ -37,7 +37,7 @@ struct MainMenu
 	auto getOutput() const
 	{
 		Dictionary dict;
-		for(const auto& i : root["MenuItems"].as<Arr>()) dict += {"MenuItems", getDictionaryFromJson(i)};
+		for(const auto& i : root["MenuItems"].as<Arr>()) dict["MenuItems"] += getDictionaryFromJson(i);
 		return dict.getExpanded(Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString());
 	}
 };
@@ -68,15 +68,15 @@ struct Main
 	void addMenu(const Val& mRoot)
 	{
 		Dictionary dict;
-		for(const auto& v : mRoot["MenuItems"].forArr()) dict += {"MenuItems", getDictionaryFromJson(v)};
+		for(const auto& v : mRoot["MenuItems"].forArr()) dict["MenuItems"] += getDictionaryFromJson(v);
 		expandedEntries.emplace_back(dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsString()));
 	}
 
 	auto getOutput() const
 	{
 		Dictionary dict;
-		for(const auto& e : expandedEntries) dict += {"Entries", {{"Entry", e}}};
-		for(const auto& a : expandedAsides) dict += {"Asides", {{"Aside", a}}};
+		for(const auto& e : expandedEntries) dict["Entries"] += Dictionary{"Entry", e};
+		for(const auto& a : expandedAsides) dict["Asides"] += Dictionary{"Aside", a};
 		return dict.getExpanded(Path{"Templates/Base/main.tpl"}.getContentsAsString());
 	}
 };
