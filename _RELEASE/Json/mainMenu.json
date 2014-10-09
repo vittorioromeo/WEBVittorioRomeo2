@@ -1,9 +1,10 @@
 {
 	"MenuItems":
 	[
-		{ "Title": "home", 		"Link": "/index.html" },
-		{ "Title": "portfolio", "Link": "/portfolio.html" },
-		{ "Title": "projects", 	"Link": "/projects.html" },
-		{ "Title": "tutorials", "Link": "/tutorials.html" }
+		{ "Title": "home",		"Link": "/index.html" },
+		{ "Title": "portfolio",	"Link": "/portfolio.html" },
+		{ "Title": "projects",	"Link": "/projects.html" },
+		{ "Title": "tutorials",	"Link": "/tutorials.html" },
+		{ "Title": "stuff",		"Link": "/stuff.html" }
 	]
 }

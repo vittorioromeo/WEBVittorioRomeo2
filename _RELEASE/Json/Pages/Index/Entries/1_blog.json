@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "CppCon2014 video and stuff",
+				"Markdown": "mdEntries/6.md",
+				"Date": "09 october 2014"
+			}
+		},
+		{
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "post-summer update",
 				"Markdown": "mdEntries/5.md",
 				"Date": "27 september 2014"
@@ -20,7 +30,7 @@
 				"Text": "<p>Get it on the projects page!</p>
 						<p>Please report issues and give your feedback on the official Facebook page.</p>
 						<hr>",
-				"Date": "2 may 2014"
+				"Date": "02 may 2014"
 			}
 		},
 		{
@@ -30,7 +40,7 @@
 			{
 				"Title": "dive into C++11 - episodes 3, 4",
 				"Markdown": "mdEntries/4.md",
-				"Date": "5 january 2014"
+				"Date": "05 january 2014"
 			}
 		},
 		{
@@ -43,7 +53,7 @@
 						<p>Learn more about `constexpr` and uniform initialization, and how to deal with FPS and framerates.</p>
 						<p>Watch on the TUTORIALS page.</p>
 						<hr>",
-				"Date": "1 december 2013"
+				"Date": "01 december 2013"
 			}
 		},
 		{
@@ -76,7 +86,7 @@
 			{
 				"Title": "operation bloodshed",
 				"Markdown": "mdEntries/3.md",
-				"Date": "7 october 2013"
+				"Date": "07 october 2013"
 			}
 		},
 		{
@@ -194,7 +204,7 @@
 						<p>Current development is on Open Hexagon updates, but also on my libraries and on experimental prototypes. I've also added a donation button to the site, which you can use if you'd like to support my work.</p>
 						<p>I will try to keep you updated in the following weeks!</p>
 						<hr>",
-				"Date": "7 may 2013"
+				"Date": "07 may 2013"
 			}
 		},
 		{
@@ -205,7 +215,7 @@
 				"Title": "open hexagon v1.91 released",
 				"Text": "<p>Server improvements.</p>
 						<hr>",
-				"Date": "9 april 2013"
+				"Date": "09 april 2013"
 			}
 		},
 		{
@@ -300,7 +310,7 @@
 				"Text": "<p>Download on the projects page.</p>
 						<p>Thanks Łukasz Magiera! :)</p>
 						<hr>",
-				"Date": "6 march 2013"
+				"Date": "06 march 2013"
 			}
 		},
 		{
@@ -313,7 +323,7 @@
 						<p><a href=\"http://www.youtube.com/watch?v=9T8HWaxMv88\">Update trailer</a></p>
 						<p>Update: Linux port released! Thanks Ethan Lee!</p>
 						<hr>",
-				"Date": "3 march 2013"
+				"Date": "03 march 2013"
 			}
 		},
 		{
@@ -346,7 +356,7 @@
 				"Title": "open hexagon v1.52 released",
 				"Text": "<p>Fixed some annoying bugs. Download from the projects page.</p>
 						<hr>",
-				"Date": "1 january 2013"
+				"Date": "01 january 2013"
 			}
 		},
 		{

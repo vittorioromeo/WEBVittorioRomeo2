@@ -1,0 +1,14 @@
+{
+	"Entries":
+	[
+		{
+			"Template": "Templates/Entries/text.tpl",
+
+			"ToExpand":
+			{
+				"Title": "",
+				"Markdown": "mdEntries/0.md"
+			}
+		}
+	]
+}
