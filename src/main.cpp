@@ -126,57 +126,63 @@ struct Page
 	}
 };
 
-// ---
-std::vector<Page> pages;
-
-void loadPages()
+struct Website
 {
-	ssvu::lo("loadPages") << "Getting all page.json files\n";
+	std::vector<Page> pages;
 
-	Path pagesPath("Json/Pages/");
-	std::vector<Path> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
-
-	for(const auto& s : pageJsonPaths)
+	void loadPages()
 	{
-		ssvu::lo("loadPages") << "> " << s << "\n";
-		pages.emplace_back(s, Val::fromFile(s));
+		ssvu::lo("loadPages") << "Getting all page.json files\n";
+
+		Path pagesPath("Json/Pages/");
+		std::vector<Path> pageJsonPaths{getScan<Mode::Recurse, Type::File, Pick::ByName>(pagesPath, "page.json")};
+
+		for(const auto& s : pageJsonPaths)
+		{
+			ssvu::lo("loadPages") << "> " << s << "\n";
+			pages.emplace_back(s, Val::fromFile(s));
+		}
 	}
-}
 
-void expandPages()
-{
-	ssvu::lo("expandPages") << "Writing pages to result\n";
-
-	for(auto& p : pages)
+	void expandPages()
 	{
-		// Check path
-		Path parentPath{p.getResultPath().getParent()};
-		ssvu::lo("expandPages") << "Checking if path exists: " << parentPath << "\n";
-		if(!parentPath.exists<Type::Folder>()) createFolder(parentPath);
+		ssvu::lo("expandPages") << "Writing pages to result\n";
 
-		// Write page to file
-		Path resultPath{p.getResultPath()};
+		for(auto& p : pages)
+		{
+			// Check path
+			Path parentPath{p.getResultPath().getParent()};
+			ssvu::lo("expandPages") << "Checking if path exists: " << parentPath << "\n";
+			if(!parentPath.exists<Type::Folder>()) createFolder(parentPath);
 
-		ssvu::lo("expandPages") << "> " << resultPath << "\n";
-		std::ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
-		ssvu::lo() << "\n";
+			// Write page to file
+			Path resultPath{p.getResultPath()};
 
-		std::ifstream inFile(resultPath + "temp");
-		std::ofstream outFile(resultPath);
+			ssvu::lo("expandPages") << "> " << resultPath << "\n";
+			std::ofstream o{resultPath + "temp"}; o << p.getOutput(); o.flush(); o.close();
+			ssvu::lo() << "\n";
 
-		std::string line;
-		while(std::getline(inFile, line)) if(!line.empty()) outFile << line << "\n";
+			std::ifstream inFile(resultPath + "temp");
+			std::ofstream outFile(resultPath);
 
-		inFile.close(); outFile.flush(); outFile.close();
-		removeFile(p.getResultPath() + "temp");
+			std::string line;
+			while(std::getline(inFile, line)) if(!line.empty()) outFile << line << "\n";
+
+			inFile.close(); outFile.flush(); outFile.close();
+			removeFile(p.getResultPath() + "temp");
+		}
 	}
-}
+};
 
 int main()
 {
 	SSVUT_RUN();
-	loadPages();
-	expandPages();
+
+	Website w;
+
+	w.loadPages();
+	w.expandPages();
+
 	ssvu::lo().flush();
 	return 0;
 }
