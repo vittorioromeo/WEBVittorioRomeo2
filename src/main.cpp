@@ -37,7 +37,7 @@ struct MainMenu
 	auto getOutput() const
 	{
 		Dictionary dict;
-		for(const auto& i : root["MenuItems"].as<Arr>()) dict["MenuItems"] += getDictionaryFromJson(i);
+		for(const auto& i : root["MenuItems"].forArr()) dict["MenuItems"] += getDictionaryFromJson(i);
 		return dict.getExpanded(Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString(), Settings::MaintainUnexisting);
 	}
 };
