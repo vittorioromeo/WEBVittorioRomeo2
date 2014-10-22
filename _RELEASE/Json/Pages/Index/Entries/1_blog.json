@@ -1,6 +1,16 @@
 {
 	"Entries":
 	[
+		{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "OH2.0-RC2 .deb available",
+				"Markdown": "mdEntries/7.md",
+				"Date": "22 october 2014"
+			}
+		},
 		{
 			"Template": "Templates/Entries/blog.tpl",
 
