@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "new year, new tutorial video",
+				"Markdown": "mdEntries/8.md",
+				"Date": "06 january 2015"
+			}
+		},
+		{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "OH2.0-RC2 .deb available",
 				"Markdown": "mdEntries/7.md",
 				"Date": "22 october 2014"
