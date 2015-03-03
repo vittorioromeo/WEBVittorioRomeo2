@@ -86,7 +86,7 @@ struct Page
 	Path myPath;
 	Val root;
 
-	MainMenu mainMenu{Val::fromFile("Json/mainMenu.json")};
+	MainMenu mainMenu{fromFile("Json/mainMenu.json")};
 	Main main;
 
 	Page(const Path& mPath, const Val& mRoot) : myPath{mPath}, root{mRoot}
@@ -102,12 +102,12 @@ struct Page
 		for(const auto& s : entryPaths)
 		{
 			if(!ssvu::endsWith(s, ".json")) continue;
-			auto eRoot(Val::fromFile(s));
+			auto eRoot(fromFile(s));
 
 			if(!eRoot.has("Entries")) appendEntry(eRoot);
 			else for(const auto& e : eRoot["Entries"].forArr()) appendEntry(e);
 		}
-		for(const auto& s : asidePaths) main.addAside(Val::fromFile(s));
+		for(const auto& s : asidePaths) main.addAside(fromFile(s));
 	}
 
 	void appendEntry(const Val& mRoot) { if(mRoot.has("MenuItems")) main.addMenu(mRoot); else main.addEntry(mRoot, myPath); }
@@ -140,7 +140,7 @@ struct Website
 		for(const auto& s : pageJsonPaths)
 		{
 			ssvu::lo("loadPages") << "> " << s << "\n";
-			pages.emplace_back(s, Val::fromFile(s));
+			pages.emplace_back(s, fromFile(s));
 		}
 	}
 
