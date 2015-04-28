@@ -38,7 +38,7 @@ struct MainMenu
 	{
 		Dictionary dict;
 		for(const auto& i : root["MenuItems"].forArr()) dict["MenuItems"] += getDictionaryFromJson(i);
-		return dict.getExpanded(Path{"Templates/Base/mainMenu.tpl"}.getContentsAsString(), Settings::MaintainUnexisting);
+		return dict.getExpanded(Path{"Templates/Base/mainMenu.tpl"}.getContentsAsStr(), Settings::MaintainUnexisting);
 	}
 };
 
@@ -54,7 +54,7 @@ struct Main
 			mRoot["Text"] = discountcpp::getHTMLFromMarkdownFile(mdPath);
 		}
 
-		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(mTplPath.getContentsAsString(), Settings::MaintainUnexisting));
+		mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(mTplPath.getContentsAsStr(), Settings::MaintainUnexisting));
 	}
 
 	void addEntry(const Val& mRoot, const Path& mPagePath)
@@ -69,7 +69,7 @@ struct Main
 	{
 		Dictionary dict;
 		for(const auto& v : mRoot["MenuItems"].forArr()) dict["MenuItems"] += getDictionaryFromJson(v);
-		expandedEntries.emplace_back(dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsString(), Settings::MaintainUnexisting));
+		expandedEntries.emplace_back(dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsStr(), Settings::MaintainUnexisting));
 	}
 
 	auto getOutput() const
@@ -77,7 +77,7 @@ struct Main
 		Dictionary dict;
 		for(const auto& e : expandedEntries) dict["Entries"] += Dictionary{"Entry", e};
 		for(const auto& a : expandedAsides) dict["Asides"] += Dictionary{"Aside", a};
-		return dict.getExpanded(Path{"Templates/Base/main.tpl"}.getContentsAsString(), Settings::MaintainUnexisting);
+		return dict.getExpanded(Path{"Templates/Base/main.tpl"}.getContentsAsStr(), Settings::MaintainUnexisting);
 	}
 };
 
@@ -122,7 +122,7 @@ struct Page
 		dict["MainMenu"] = mainMenu.getOutput();
 		dict["Main"] = main.getOutput();
 		dict["ResourcesPath"] = resourcesPath;
-		return dict.getExpanded(Path{"Templates/page.tpl"}.getContentsAsString(), Settings::MaintainUnexisting);
+		return dict.getExpanded(Path{"Templates/page.tpl"}.getContentsAsStr(), Settings::MaintainUnexisting);
 	}
 };
 
