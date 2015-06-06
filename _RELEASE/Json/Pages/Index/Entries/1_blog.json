@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "dive into c++14!",
+				"Markdown": "mdEntries/a2.md",
+				"Date": "6 june 2015"
+			}
+		},
+		{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "new dive into c++ episode",
 				"Markdown": "mdEntries/a1.md",
 				"Date": "21 march 2015"
