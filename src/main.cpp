@@ -5,8 +5,7 @@
 /*#include <SSVUtils/Core/Core.hpp>
 #include <SSVUtils/Json/Json.hpp>
 #include <SSVUtils/TemplateSystem/TemplateSystem.hpp>
-#include <SSVUtils/Test/Test.hpp>
-#include <SSVUtils/Tests/TestsJson.hpp>*/
+#include <SSVUtils/Test/Test.hpp>*/
 #include <SSVUtils/SSVUtils.hpp>
 #include <DiscountCpp/DiscountCpp.hpp>
 
