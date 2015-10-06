@@ -39,8 +39,8 @@ struct MainMenu
         for(const auto& i : root["MenuItems"].forArr())
             dict["MenuItems"] += getDictionaryFromJson(i);
         return dict.getExpanded(
-        Path{"Templates/Base/mainMenu.tpl"}.getContentsAsStr(),
-        Settings::MaintainUnexisting);
+            Path{"Templates/Base/mainMenu.tpl"}.getContentsAsStr(),
+            Settings::MaintainUnexisting);
     }
 };
 
@@ -49,36 +49,37 @@ struct Main
     std::vector<std::string> expandedEntries{""}, expandedAsides{""};
 
     void expandItem(const Path& mTplPath, Val mRoot,
-    std::vector<std::string>& mTarget, const Path& mPagePath = "")
+        std::vector<std::string>& mTarget, const Path& mPagePath = "")
     {
-        if(mRoot.has("Markdown")) {
-            Path mdPath{
-            mPagePath.getParent() + "Entries/" + mRoot["Markdown"].as<Str>()};
+        if(mRoot.has("Markdown"))
+        {
+            Path mdPath{mPagePath.getParent() + "Entries/" +
+                        mRoot["Markdown"].as<Str>()};
             mRoot["Text"] = discountcpp::getHTMLFromMarkdownFile(mdPath);
         }
 
         mTarget.emplace_back(getDictionaryFromJson(mRoot).getExpanded(
-        mTplPath.getContentsAsStr(), Settings::MaintainUnexisting));
+            mTplPath.getContentsAsStr(), Settings::MaintainUnexisting));
     }
 
     void addEntry(const Val& mRoot, const Path& mPagePath)
     {
         expandItem(mRoot["Template"].as<Str>(), mRoot["ToExpand"],
-        expandedEntries, mPagePath);
+            expandedEntries, mPagePath);
     }
     void addAside(const Val& mRoot)
     {
         expandItem(
-        mRoot["Template"].as<Str>(), mRoot["ToExpand"], expandedAsides);
+            mRoot["Template"].as<Str>(), mRoot["ToExpand"], expandedAsides);
     }
     void addMenu(const Val& mRoot)
     {
         Dictionary dict;
         for(const auto& v : mRoot["MenuItems"].forArr())
             dict["MenuItems"] += getDictionaryFromJson(v);
-        expandedEntries.emplace_back(
-        dict.getExpanded(Path{"Templates/Entries/menu.tpl"}.getContentsAsStr(),
-        Settings::MaintainUnexisting));
+        expandedEntries.emplace_back(dict.getExpanded(
+            Path{"Templates/Entries/menu.tpl"}.getContentsAsStr(),
+            Settings::MaintainUnexisting));
     }
 
     auto getOutput() const
@@ -89,8 +90,8 @@ struct Main
         for(const auto& a : expandedAsides)
             dict["Asides"] += Dictionary{"Aside", a};
         return dict.getExpanded(
-        Path{"Templates/Base/main.tpl"}.getContentsAsStr(),
-        Settings::MaintainUnexisting);
+            Path{"Templates/Base/main.tpl"}.getContentsAsStr(),
+            Settings::MaintainUnexisting);
     }
 };
 
@@ -106,16 +107,17 @@ struct Page
     {
         Path pageFolder{myPath.getParent()};
         Path entriesFolder{pageFolder + "Entries/"},
-        asidesFolder{pageFolder + "Asides/"};
+            asidesFolder{pageFolder + "Asides/"};
 
         std::vector<Path> entryPaths{
-        getScan<Mode::Recurse, Type::File>(entriesFolder)};
+            getScan<Mode::Recurse, Type::File>(entriesFolder)};
 
         std::vector<Path> asidePaths;
         if(asidesFolder.exists<Type::Folder>())
             asidePaths = getScan<Mode::Recurse, Type::File>(asidesFolder);
 
-        for(const auto& s : entryPaths) {
+        for(const auto& s : entryPaths)
+        {
             if(!ssvu::endsWith(s, ".json")) continue;
             auto eRoot(fromFile(s));
 
@@ -143,14 +145,14 @@ struct Page
     auto getOutput() const
     {
         Path resourcesPath{
-        getResourcesFolderPath(getDepth(getResultPath()) - 1)};
+            getResourcesFolderPath(getDepth(getResultPath()) - 1)};
 
         Dictionary dict;
         dict["MainMenu"] = mainMenu.getOutput();
         dict["Main"] = main.getOutput();
         dict["ResourcesPath"] = resourcesPath;
         return dict.getExpanded(Path{"Templates/page.tpl"}.getContentsAsStr(),
-        Settings::MaintainUnexisting);
+            Settings::MaintainUnexisting);
     }
 };
 
@@ -164,10 +166,11 @@ struct Website
 
         Path pagesPath("Json/Pages/");
         std::vector<Path> pageJsonPaths{
-        getScan<Mode::Recurse, Type::File, Pick::ByName>(
-        pagesPath, "page.json")};
+            getScan<Mode::Recurse, Type::File, Pick::ByName>(
+                pagesPath, "page.json")};
 
-        for(const auto& s : pageJsonPaths) {
+        for(const auto& s : pageJsonPaths)
+        {
             ssvu::lo("loadPages") << "> " << s << "\n";
             pages.emplace_back(s, fromFile(s));
         }
@@ -177,7 +180,8 @@ struct Website
     {
         ssvu::lo("expandPages") << "Writing pages to result\n";
 
-        for(auto& p : pages) {
+        for(auto& p : pages)
+        {
             // Check path
             Path parentPath{p.getResultPath().getParent()};
             ssvu::lo("expandPages") << "Checking if path exists: " << parentPath
