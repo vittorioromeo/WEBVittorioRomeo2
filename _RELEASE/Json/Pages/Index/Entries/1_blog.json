@@ -1,6 +1,15 @@
 {
 	"Entries":
-	[
+	[{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
+				"Title": "my cppcon 2015 talks",
+				"Markdown": "mdEntries/a3.md",
+				"Date": "30 october 2015"
+			}
+		},
 		{	
 			"Template": "Templates/Entries/blog.tpl",
 
