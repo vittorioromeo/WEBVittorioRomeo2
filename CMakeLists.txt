@@ -5,6 +5,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../SSVCMake/cmake/modules/;${CMAKE_SO
 include(SSVCMake)
 
 SSVCMake_setDefaults()
+SSVCMake_findExtlib(vrm_pp)
 SSVCMake_findExtlib(SSVUtils)
 find_library(LIB_MARKDOWN markdown)
 find_path(INC_MARKDOWN mkdio.h)
