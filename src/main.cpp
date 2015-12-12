@@ -215,8 +215,6 @@ struct Website
 
 int main()
 {
-    SSVUT_RUN();
-
     Website w;
 
     w.loadPages();
