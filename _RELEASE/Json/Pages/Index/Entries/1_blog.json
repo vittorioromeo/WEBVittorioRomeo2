@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "meeting c++ lightning talks",
+				"Markdown": "mdEntries/a5.md",
+				"Date": "12 december 2015"
+			}
+		},
+		{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "new tutorial, meeting c++",
 				"Markdown": "mdEntries/a4.md",
 				"Date": "06 december 2015"
