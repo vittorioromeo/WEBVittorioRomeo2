@@ -1,12 +1,9 @@
 {
-	"Template": "Templates/Entries/text.tpl",
+    "Template": "Templates/Entries/text.tpl",
 
-	"ToExpand":
-	{
-		"Title": "basic skills",
-		"Text": "<p>Ability to speak Italian and English fluently.<br>
-				Ability to solve problems creatively and efficiently.<br>
-				Ability to learn new notions easily.<br></p>
-				<hr>"
-	}
+    "ToExpand":
+    {
+        "Title": "communication skills",
+        "Text": "<p><ul><li>Can speak <strong>Italian</strong><span>&#8203; <em>(mother tongue) </em><span>&#8203;and <strong>&#8203;English</strong><span >&#8203; <em>(C1 self-assessment)</em></span></span></span><strong></strong></li><li>Can easily <strong>collaborate with others </strong><em>(worked in groups and volunteered)</em></li><li>Experienced in <b>teaching </b>and <b>lecturing </b><i>(spoke at several international programming conferences, created well-received video tutorials)</i></li></ul></p> <hr> "
+    }
 }

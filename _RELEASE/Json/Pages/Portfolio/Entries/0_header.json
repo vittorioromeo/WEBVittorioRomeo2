@@ -1,10 +1,9 @@
 {
-	"Template": "Templates/Entries/header.tpl",
+    "Template": "Templates/Entries/header.tpl",
 
-	"ToExpand":
-	{
-		"Title": "portfolio",
-		"Text": "This is a list of my experiences - basically a list of what I'm able to do properly.
-				<hr>"
-	}
+    "ToExpand":
+    {
+        "Title": "portfolio",
+        "Text": "This is my current portfolio/CV. <hr>"
+    }
 }
