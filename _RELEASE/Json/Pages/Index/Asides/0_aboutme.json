@@ -4,6 +4,6 @@
     "ToExpand":
     {
         "Title": "about me",
-        "Text": "Hello! My name is Vittorio. I'm a Computer Science student at the \"University of Messina\". I write libraries, applications and games. <br> I'm a modern C++ enthusiast - I love sharing my knowledge by creating video tutorials and participating to conferences.</p> <br> <p>I'm currently looking for a job or projects to work on. Check out my portfolio or contact me if you're interested.</p> <br> Please consider donating if you enjoy my projects!"
+        "Text": "<p>Hello! My name is Vittorio. I'm a Computer Science student at the \"University of Messina\". I write libraries, applications and games.</p> <br> I'm a modern C++ enthusiast - I love sharing my knowledge by creating video tutorials and participating to conferences.</p> <br> <p>I'm currently looking for a job or projects to work on. Check out my portfolio or contact me if you're interested.</p> <br> Please consider donating if you enjoy my projects!"
     }
 }

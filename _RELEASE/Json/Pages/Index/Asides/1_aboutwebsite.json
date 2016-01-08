@@ -4,6 +4,6 @@
     "ToExpand":
     {
         "Title": "about this site",
-        "Text": "This is my personal website. It's statically generated with C++14, using JSON and an handwritten template system. I will use this website both as a blog and as a hub for all of my projects.</p></br><p>You can find the source code on my GitHub page, which can be reached through the links below. </br> Enjoy your stay!"
+        "Text": "<p>This is my personal website. It's statically generated with C++14, using JSON and an handwritten template system. I will use this website both as a blog and as a hub for all of my projects.</p></br><p>You can find the source code on my GitHub page, which can be reached through the links below.</p> </br> <p>Enjoy your stay!</p>"
     }
 }
