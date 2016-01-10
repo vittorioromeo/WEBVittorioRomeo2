@@ -1,14 +1,21 @@
-cmake_minimum_required(VERSION 2.8)
-project(WEBVittorioRomeo2)
+cmake_minimum_required(VERSION 3.0)
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../SSVCMake/cmake/modules/;${CMAKE_SOURCE_DIR}/extlibs/SSVCMake/cmake/modules/;${CMAKE_MODULE_PATH}")
+# Include SSVCmake.
+list(APPEND CMAKE_MODULE_PATH
+    "${CMAKE_SOURCE_DIR}/../SSVCMake/cmake/modules/"
+    "${CMAKE_SOURCE_DIR}/extlibs/SSVCMake/cmake/modules/")
+
 include(SSVCMake)
 
-SSVCMake_setDefaults()
-SSVCMake_findExtlib(vrm_pp)
-SSVCMake_findExtlib(SSVUtils)
+# Basic project setup.
+vrm_cmake_init_project(WEBVittorioRomeo2)
+vrm_cmake_find_extlib(vrm_pp)
+vrm_cmake_find_extlib(SSVUtils)
 find_library(LIB_MARKDOWN markdown)
 find_path(INC_MARKDOWN mkdio.h)
+
+SSVCMake_setDefaults()
+vrm_cmake_add_common_compiler_flags()
 
 include_directories(${INC_MARKDOWN})
 add_executable(${PROJECT_NAME} ${SRC_LIST})
