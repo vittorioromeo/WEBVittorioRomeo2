@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "trip report - C++Now 2016",
+				"Markdown": "mdEntries/a6.md",
+				"Date": "16 may 2016"
+			}
+		},
+		{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "meeting c++ lightning talks",
 				"Markdown": "mdEntries/a5.md",
 				"Date": "12 december 2015"
