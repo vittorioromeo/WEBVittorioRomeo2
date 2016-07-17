@@ -6,6 +6,16 @@
 
 			"ToExpand":
 			{
+				"Title": "C++Now 2016 videos available",
+				"Markdown": "mdEntries/a7.md",
+				"Date": "17 july 2016"
+			}
+		},
+		{	
+			"Template": "Templates/Entries/blog.tpl",
+
+			"ToExpand":
+			{
 				"Title": "trip report - C++Now 2016",
 				"Markdown": "mdEntries/a6.md",
 				"Date": "16 may 2016"
