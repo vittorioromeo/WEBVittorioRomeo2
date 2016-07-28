@@ -16,8 +16,13 @@ find_path(INC_MARKDOWN mkdio.h)
 
 vrm_cmake_add_common_compiler_flags()
 
+set(WVR2_SRC_DIR "${WEBVITTORIOROMEO2_SOURCE_DIR}/src/")
+set(WVR2_INC_DIR "${WEBVITTORIOROMEO2_SOURCE_DIR}/include/")
+
+include_directories("${WVR2_INC_DIR}")
 include_directories(${INC_MARKDOWN})
-add_executable(${PROJECT_NAME} ${SRC_LIST})
+
+add_executable(${PROJECT_NAME} "${WVR2_SRC_DIR}/main.cpp")
 target_link_libraries(${PROJECT_NAME} ${LIB_MARKDOWN})
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/_RELEASE/)
